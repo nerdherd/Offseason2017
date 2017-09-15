@@ -12,6 +12,11 @@ import com.team687.frc2017.commands.drive.ShiftDown;
 import com.team687.frc2017.commands.drive.ShiftUp;
 import com.team687.frc2017.commands.drive.SnapToTarget;
 import com.team687.frc2017.commands.drive.TankDrive;
+import com.team687.frc2017.commands.gear.IntakeSetPosition;
+import com.team687.frc2017.commands.gear.IntakeTuckRetain;
+import com.team687.frc2017.commands.gear.Outtake;
+import com.team687.frc2017.commands.gear.SpinSpeed;
+import com.team687.frc2017.constants.GearIntakeConstants;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -98,13 +103,15 @@ public class OI {
 
 	SmartDashboard.putData("Shift Up", new ShiftUp());
 	SmartDashboard.putData("Shift Down", new ShiftDown());
-
-	// SmartDashboard.putData("Test Collision Detection", new
-	// TestCollisionDetection());
 	SmartDashboard.putData("Drive until Collision", new DriveUntilCollision(0.687, true));
 
 	SmartDashboard.putData("Live Vision Tracking", new LiveVisionTracking());
 	SmartDashboard.putData("Snap To Target Auto", new SnapToTarget(true));
+
+	SmartDashboard.putData("Gear Intake Down", new IntakeSetPosition(GearIntakeConstants.kGearIntakeDownPos));
+	SmartDashboard.putData("Gear Intake Up Hold", new IntakeTuckRetain());
+	SmartDashboard.putData("Outtake gear", new Outtake());
+	SmartDashboard.putData("Intake gear", new SpinSpeed(GearIntakeConstants.kGearIntakeSpinVoltage));
 
 	SmartDashboard.putData("Blue 973 Hopper Auto", new BlueHopperShootAuto973());
 	SmartDashboard.putData("Blue 1678 Hopper Auto", new BlueHopperShootAuto1678());
