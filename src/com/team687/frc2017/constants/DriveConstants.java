@@ -18,30 +18,22 @@ public class DriveConstants {
     // Distance PID
     public final static double kDistF = 0;
     public final static double kDistP = 0.001;
+    public final static double kMinDistPower = 0;
+    public final static double kMaxDistPower = 1.0;
     public final static double kDistI = 0;
     public final static double kDistD = 0;
-    public final static double kMinDistPowerLowGear = 0;
-    public final static double kMaxDistPowerLowGear = 1.0;
     public final static double kDriveDistanceTolerance = 205.6;
     public final static double kDriveDistanceOscillationCount = 5;
 
-    public final static double kDistPHighGear = 0.001;
-    public final static double kMinDistPowerHighGear = 0;
-    public final static double kMaxDistPowerHighGear = 1.0;
-
     // Rotation PID
-    public final static double kRotPLowGear = 0.015;
+    public final static double kRotP = 0.05;
+    public final static double kMinRotPower = 0.254;
+    public final static double kMaxRotPower = 1.0;
     public final static double kRotI = 0;
     public final static double kRotD = 0;
-    public final static double kMinRotPowerLowGear = 0.12;
-    public final static double kMaxRotPowerLowGear = 1.0;
     public final static double kDriveRotationTolerance = 0.5;
     public final static double kDriveRotationDeadband = 0.5;
     public final static int kDriveRotationCounter = 3;
-
-    public final static double kRotPHighGear = 0.05;
-    public final static double kMinRotPowerHighGear = 0.254;
-    public final static double kMaxRotPowerHighGear = 1.0;
 
     // Motion Profiling
     public final static double kMaxVelocity = 0;

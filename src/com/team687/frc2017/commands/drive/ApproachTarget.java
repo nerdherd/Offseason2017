@@ -54,7 +54,7 @@ public class ApproachTarget extends Command {
 	SmartDashboard.putString("Current Command", "ApproachTarget");
 
 	Robot.drive.stopDrive();
-	Robot.drive.shiftDown();
+	Robot.drive.shiftUp();
 
 	m_startTime = Timer.getFPGATimestamp();
     }
@@ -66,7 +66,7 @@ public class ApproachTarget extends Command {
 	double processingTime = VisionAdapter.getInstance().getProcessedTime();
 	double absoluteDesiredAngle = relativeAngleError + Robot.drive.timeMachineYaw(processingTime);
 	double rotError = absoluteDesiredAngle - robotAngle;
-	double rotPower = DriveConstants.kRotPLowGear * rotError;
+	double rotPower = DriveConstants.kRotP * rotError;
 	if (Math.abs(rotError) <= DriveConstants.kDriveRotationDeadband) {
 	    rotPower = 0;
 	}
@@ -77,8 +77,8 @@ public class ApproachTarget extends Command {
 	    straightPower = DriveConstants.kDistP * straightError;
 	}
 	double sign = Math.signum(straightPower);
-	if (Math.abs(straightPower) < DriveConstants.kMinDistPowerLowGear) {
-	    straightPower = DriveConstants.kMinDistPowerLowGear * sign;
+	if (Math.abs(straightPower) < DriveConstants.kMinDistPower) {
+	    straightPower = DriveConstants.kMinDistPower * sign;
 	}
 
 	Robot.drive.setPower(rotPower + straightPower, rotPower - straightPower);

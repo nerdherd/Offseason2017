@@ -47,7 +47,7 @@ public class SnapToTarget extends Command {
 	SmartDashboard.putString("Current Command", "SnapToTarget");
 
 	Robot.drive.stopDrive();
-	Robot.drive.shiftDown();
+	Robot.drive.shiftUp();
 	m_counter = 0;
 
 	m_startTime = Timer.getFPGATimestamp();
@@ -61,7 +61,7 @@ public class SnapToTarget extends Command {
 	double absoluteDesiredAngle = relativeAngleError + Robot.drive.timeMachineYaw(processingTime);
 	double error = absoluteDesiredAngle - robotAngle;
 	SmartDashboard.putNumber("Angle Error", error);
-	double rotPower = DriveConstants.kRotPLowGear * error;
+	double rotPower = DriveConstants.kRotP * error;
 	if (Math.abs(error) <= DriveConstants.kDriveRotationDeadband) {
 	    rotPower = 0;
 	    m_counter++;

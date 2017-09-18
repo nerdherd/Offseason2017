@@ -78,10 +78,10 @@ public class ArcTurn extends Command {
 	m_startTime = Timer.getFPGATimestamp();
 	if (m_isHighGear) {
 	    Robot.drive.shiftUp();
-	    m_kP = DriveConstants.kRotPHighGear;
+	    m_kP = DriveConstants.kRotP;
 	} else if (!m_isHighGear) {
 	    Robot.drive.shiftDown();
-	    m_kP = DriveConstants.kRotPLowGear;
+	    m_kP = DriveConstants.kRotP;
 	}
     }
 

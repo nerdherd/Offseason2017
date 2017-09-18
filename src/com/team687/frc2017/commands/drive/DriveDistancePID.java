@@ -43,19 +43,19 @@ public class DriveDistancePID extends Command {
 
 	m_leftDistPID = new NerdyPID();
 	m_leftDistPID.setPID(DriveConstants.kDistP, DriveConstants.kDistI, DriveConstants.kDistD);
-	m_leftDistPID.setOutputRange(DriveConstants.kMinDistPowerLowGear, DriveConstants.kMaxDistPowerLowGear);
+	m_leftDistPID.setOutputRange(DriveConstants.kMinDistPower, DriveConstants.kMaxDistPower);
 	m_leftDistPID.setGyro(false);
 	m_leftDistPID.setDesired(m_leftDistance);
 
 	m_rightDistPID = new NerdyPID();
 	m_rightDistPID.setPID(DriveConstants.kDistP, DriveConstants.kDistI, DriveConstants.kDistD);
-	m_rightDistPID.setOutputRange(DriveConstants.kMinDistPowerLowGear, DriveConstants.kMaxDistPowerLowGear);
+	m_rightDistPID.setOutputRange(DriveConstants.kMinDistPower, DriveConstants.kMaxDistPower);
 	m_rightDistPID.setGyro(false);
 	m_rightDistPID.setDesired(m_rightDistance);
 
 	m_rotPID = new NerdyPID();
-	m_rotPID.setPID(DriveConstants.kRotPLowGear, DriveConstants.kRotI, DriveConstants.kRotD);
-	m_rotPID.setOutputRange(DriveConstants.kMinDistPowerLowGear, DriveConstants.kMaxDistPowerLowGear);
+	m_rotPID.setPID(DriveConstants.kRotP, DriveConstants.kRotI, DriveConstants.kRotD);
+	m_rotPID.setOutputRange(DriveConstants.kMinDistPower, DriveConstants.kMaxDistPower);
 	m_rotPID.setGyro(true);
 	m_rotPID.setDesired(Robot.drive.getCurrentYaw());
 

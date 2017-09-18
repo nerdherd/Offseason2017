@@ -23,14 +23,12 @@ public class TurnToAngle extends Command {
 
     private double m_kP;
     private double m_minRotPower;
-    private boolean m_isHighGear;
 
     // private NerdyPID m_rotPID;
 
     public TurnToAngle(double angle) {
 	m_angleToTurn = angle;
 	m_timeout = 10; // default timeout is 10 seconds
-	m_isHighGear = false;
 
 	// subsystem dependencies
 	requires(Robot.drive);
@@ -43,21 +41,6 @@ public class TurnToAngle extends Command {
     public TurnToAngle(double angle, double timeout) {
 	m_angleToTurn = angle;
 	m_timeout = timeout;
-	m_isHighGear = false;
-
-	// subsystem dependencies
-	requires(Robot.drive);
-    }
-
-    /**
-     * @param angle
-     * @param timeout
-     * @param isHighGear
-     */
-    public TurnToAngle(double angle, double timeout, boolean isHighGear) {
-	m_angleToTurn = angle;
-	m_timeout = timeout;
-	m_isHighGear = isHighGear;
 
 	// subsystem dependencies
 	requires(Robot.drive);
@@ -72,15 +55,9 @@ public class TurnToAngle extends Command {
 	// m_rotPID.setDesired(m_angleToTurn);
 	// m_rotPID.setGyro(true);
 
-	if (m_isHighGear) {
-	    Robot.drive.shiftUp();
-	    m_kP = DriveConstants.kRotPHighGear;
-	    m_minRotPower = DriveConstants.kMinRotPowerHighGear;
-	} else if (!m_isHighGear) {
-	    Robot.drive.shiftDown();
-	    m_kP = DriveConstants.kRotPLowGear;
-	    m_minRotPower = DriveConstants.kMinRotPowerLowGear;
-	}
+	Robot.drive.shiftUp();
+	m_kP = DriveConstants.kRotP;
+	m_minRotPower = DriveConstants.kMinRotPower;
     }
 
     @Override

@@ -35,7 +35,7 @@ public class LiveVisionTracking extends Command {
 	// m_rotPID.setGyro(true);
 
 	Robot.drive.stopDrive();
-	Robot.drive.shiftDown();
+	Robot.drive.shiftUp();
     }
 
     @Override
@@ -47,10 +47,10 @@ public class LiveVisionTracking extends Command {
 	double error = absoluteDesiredAngle - robotAngle;
 	SmartDashboard.putNumber("Angle Error", error);
 	// double power = m_rotPID.calculate(Robot.drive.getCurrentYaw());
-	double power = DriveConstants.kRotPLowGear * error;
+	double power = DriveConstants.kRotP * error;
 	double sign = Math.signum(power);
-	if (Math.abs(power) < DriveConstants.kMinRotPowerLowGear) {
-	    power = sign * DriveConstants.kMinRotPowerLowGear;
+	if (Math.abs(power) < DriveConstants.kMinRotPower) {
+	    power = sign * DriveConstants.kMinRotPower;
 	}
 	if (Math.abs(error) <= DriveConstants.kDriveRotationDeadband) {
 	    power = 0;
