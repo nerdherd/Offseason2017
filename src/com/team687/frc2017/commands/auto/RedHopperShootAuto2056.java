@@ -22,7 +22,7 @@ public class RedHopperShootAuto2056 extends CommandGroup {
 	addSequential(new DriveBezierRio(DriveConstants.RedPathWallToHopper2056, 0.4, false, false));
 
 	// proc hopper by turning
-	addSequential(new TurnTime(-0.687, 0.3, true));
+	addSequential(new TurnTime(-0.687, 0.3));
 
 	// drive align with goal
 	addSequential(new SnapToTarget(true));

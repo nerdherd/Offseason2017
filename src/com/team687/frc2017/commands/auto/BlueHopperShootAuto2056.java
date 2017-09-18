@@ -25,7 +25,7 @@ public class BlueHopperShootAuto2056 extends CommandGroup {
 	addSequential(new WaitTime(0.3));
 
 	// proc hopper by turning
-	addSequential(new TurnTime(0.687, 0.35, true));
+	addSequential(new TurnTime(0.687, 0.35));
 	addSequential(new WaitTime(0.1));
 
 	// drive align with goal

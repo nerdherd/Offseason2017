@@ -19,9 +19,9 @@ public class BlueGearHopperShootAuto254 extends CommandGroup {
     public BlueGearHopperShootAuto254() {
 	// deploy gear
 	addSequential(new DriveBezierRio(DriveConstants.BluePathWallToClosePeg, -0.687, true, true));
-	addSequential(new TurnToAngle(60.126, 2, true)); // This is the first heading in the next path
-							 // segment. This solves a problem where robot starts spinning
-							 // to find correct heading between two path segments.
+	addSequential(new TurnToAngle(60.126, 2)); // This is the first heading in the next path
+						   // segment. This solves a problem where robot starts spinning
+						   // to find correct heading between two path segments.
 	// addSequential(new DeployGear());
 
 	// drive to hopper

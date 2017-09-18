@@ -24,7 +24,7 @@ public class BlueClosePegTwoGearAuto extends CommandGroup {
 	addSequential(new DriveBezierRio(DriveConstants.BluePathClosePegBackUp, 0.687, true, true));
 	addSequential(new WaitTime(0.2));
 
-	addSequential(new TurnToAngle(DriveConstants.BlueWallCloseToSecondGearAngle, 4, true));
+	addSequential(new TurnToAngle(DriveConstants.BlueWallCloseToSecondGearAngle, 4));
 	addSequential(new WaitTime(0.2));
 	// addParallel(new IntakeGear());
 	addSequential(new DriveDistancePID(DriveConstants.BlueWallCloseToSecondGearDistance,
@@ -34,12 +34,12 @@ public class BlueClosePegTwoGearAuto extends CommandGroup {
 		-DriveConstants.BlueWallCloseToSecondGearDistance));
 	addSequential(new WaitTime(0.2));
 	// addParallel(new GearManipUp());
-	addSequential(new TurnToAngle(0, 4, true));
+	addSequential(new TurnToAngle(0, 4));
 	addSequential(new WaitTime(0.2));
 
 	addSequential(new DriveBezierRio(DriveConstants.BluePathWallToClosePeg, -0.687, true, true));
 	// addSequential(new DeployGear());
-	addSequential(new DriveTime(0.5, 3, false));
+	addSequential(new DriveTime(0.5, 3));
     }
 
 }
