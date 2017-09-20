@@ -7,7 +7,8 @@ import com.team687.frc2017.constants.DriveConstants;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- * Blue hopper auto 1678 (follow the wall)
+ * Blue hopper auto 1678 (follow the wall, starts with side of robot one fuel
+ * ball away from boiler)
  * 
  * @author tedlin
  *

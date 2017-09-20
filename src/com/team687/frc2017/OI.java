@@ -1,5 +1,6 @@
 package com.team687.frc2017;
 
+import com.team687.frc2017.commands.auto.BlueCenterPegTwoGearAuto;
 import com.team687.frc2017.commands.auto.BlueGearHopperShootAuto254;
 import com.team687.frc2017.commands.auto.BlueHopperShootAuto1678;
 import com.team687.frc2017.commands.auto.BlueHopperShootAuto2056;
@@ -103,7 +104,7 @@ public class OI {
 
 	SmartDashboard.putData("Shift Up", new ShiftUp());
 	SmartDashboard.putData("Shift Down", new ShiftDown());
-	SmartDashboard.putData("Drive until Collision", new DriveUntilCollision(0.687, true));
+	SmartDashboard.putData("Drive until Collision", new DriveUntilCollision(0.687, 1.95));
 
 	SmartDashboard.putData("Live Vision Tracking", new LiveVisionTracking());
 	SmartDashboard.putData("Snap To Target Auto", new SnapToTarget(true));
@@ -117,6 +118,7 @@ public class OI {
 	SmartDashboard.putData("Blue 1678 Hopper Auto", new BlueHopperShootAuto1678());
 	SmartDashboard.putData("Blue 2056 Hopper Auto", new BlueHopperShootAuto2056());
 	SmartDashboard.putData("Blue 254 Gear + Hopper Auto", new BlueGearHopperShootAuto254());
+	SmartDashboard.putData("Blue Center Peg Two Gear Auto", new BlueCenterPegTwoGearAuto());
 	// SmartDashboard.putData("Red 973 Hopper Auto", new RedHopperShootAuto973());
 	// SmartDashboard.putData("Red 1678 Hopper Auto", new RedHopperShootAuto1678());
 	// SmartDashboard.putData("Red 2056 Hopper Auto", new RedHopperShootAuto2056());

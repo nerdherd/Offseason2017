@@ -76,7 +76,7 @@ public class DriveUntilCollision extends Command {
     protected boolean isFinished() {
 	return Math.abs(m_jerkX) > DriveConstants.kCollisionThreshold
 		|| Math.abs(m_jerkY) > DriveConstants.kCollisionThreshold
-		|| Timer.getFPGATimestamp() - m_startTime > m_timeout;
+		|| Timer.getFPGATimestamp() > m_timeout + m_startTime;
     }
 
     @Override

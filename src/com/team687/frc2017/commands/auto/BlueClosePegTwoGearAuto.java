@@ -5,6 +5,8 @@ import com.team687.frc2017.commands.drive.DriveDistancePID;
 import com.team687.frc2017.commands.drive.DriveTime;
 import com.team687.frc2017.commands.drive.TurnToAngle;
 import com.team687.frc2017.commands.drive.WaitTime;
+import com.team687.frc2017.commands.gear.IntakeDown;
+import com.team687.frc2017.commands.gear.IntakeTuckRetain;
 import com.team687.frc2017.constants.DriveConstants;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -19,8 +21,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class BlueClosePegTwoGearAuto extends CommandGroup {
 
     public BlueClosePegTwoGearAuto() {
+	addParallel(new IntakeTuckRetain());
 	addSequential(new DriveBezierRio(DriveConstants.BluePathWallToClosePeg, -0.687, true, true));
-	// addSequential(new DeployGear());
+	addParallel(new IntakeDown());
 	addSequential(new DriveBezierRio(DriveConstants.BluePathClosePegBackUp, 0.687, true, true));
 	addSequential(new WaitTime(0.2));
 

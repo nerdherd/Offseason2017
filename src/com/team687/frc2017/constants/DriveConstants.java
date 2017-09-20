@@ -28,7 +28,7 @@ public class DriveConstants {
     // Rotation PID
     public final static double kRotP = 0.05;
     public final static double kMinRotPower = 0.254;
-    public final static double kMaxRotPower = 1.0;
+    public final static double kMaxRotPower = 0.971;
     public final static double kRotI = 0;
     public final static double kRotD = 0;
     public final static double kDriveRotationTolerance = 0.5;

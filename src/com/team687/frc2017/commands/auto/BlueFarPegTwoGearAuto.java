@@ -5,6 +5,9 @@ import com.team687.frc2017.commands.drive.DriveDistancePID;
 import com.team687.frc2017.commands.drive.DriveTime;
 import com.team687.frc2017.commands.drive.TurnToAngle;
 import com.team687.frc2017.commands.drive.WaitTime;
+import com.team687.frc2017.commands.gear.IntakeDown;
+import com.team687.frc2017.commands.gear.IntakeDownSpin;
+import com.team687.frc2017.commands.gear.IntakeTuckRetain;
 import com.team687.frc2017.constants.DriveConstants;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -20,20 +23,20 @@ public class BlueFarPegTwoGearAuto extends CommandGroup {
 
     public BlueFarPegTwoGearAuto() {
 	addSequential(new DriveBezierRio(DriveConstants.BluePathWallToFarPeg, -0.687, true, true));
-	// addSequential(new DeployGear());
+	addParallel(new IntakeDown());
 	addSequential(new DriveBezierRio(DriveConstants.BluePathFarPegBackUp, 0.687, true, true));
 	addSequential(new WaitTime(0.2));
 
+	addParallel(new IntakeDownSpin());
 	addSequential(new TurnToAngle(DriveConstants.BlueWallFarToSecondGearAngle, 4));
 	addSequential(new WaitTime(0.2));
-	// addParallel(new IntakeGear());
 	addSequential(new DriveDistancePID(DriveConstants.BlueWallFarToSecondGearDistance,
 		DriveConstants.BlueWallFarToSecondGearDistance));
 	addSequential(new WaitTime(0.2));
 	addSequential(new DriveDistancePID(-DriveConstants.BlueWallFarToSecondGearDistance,
 		-DriveConstants.BlueWallFarToSecondGearDistance));
 	addSequential(new WaitTime(0.2));
-	// addParallel(new GearManipUp());
+	addParallel(new IntakeTuckRetain());
 	addSequential(new TurnToAngle(0, 4));
 	addSequential(new WaitTime(0.2));
 

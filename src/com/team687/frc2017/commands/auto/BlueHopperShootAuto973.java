@@ -24,7 +24,8 @@ public class BlueHopperShootAuto973 extends CommandGroup {
 	// 0.687, true, false));
 
 	// drive to hopper with continuous motion and arc turns
-	addSequential(new DriveStraightContinuous(DriveConstants.BlueWallToHopperInitialDistance, 0.687, true));
+	addSequential(new DriveStraightContinuous(DriveConstants.BlueWallToHopperInitialDistance,
+		DriveConstants.kMaxRotPower, true));
 	addSequential(new ArcTurn(DriveConstants.BlueWallToHopperArcTurnAngle, true, 0, true));
 	addSequential(new DriveUntilCollision(0.971, 1.95));
 

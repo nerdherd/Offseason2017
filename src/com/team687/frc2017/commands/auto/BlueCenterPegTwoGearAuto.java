@@ -5,6 +5,9 @@ import com.team687.frc2017.commands.drive.DriveTime;
 import com.team687.frc2017.commands.drive.SnapToTarget;
 import com.team687.frc2017.commands.drive.TurnToAngle;
 import com.team687.frc2017.commands.drive.WaitTime;
+import com.team687.frc2017.commands.gear.IntakeDown;
+import com.team687.frc2017.commands.gear.IntakeDownSpin;
+import com.team687.frc2017.commands.gear.IntakeTuckRetain;
 import com.team687.frc2017.constants.DriveConstants;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -19,22 +22,23 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class BlueCenterPegTwoGearAuto extends CommandGroup {
 
     public BlueCenterPegTwoGearAuto() {
+	addSequential(new IntakeTuckRetain());
 	addSequential(new DriveDistancePID(DriveConstants.BlueWallToCenterPegDistance,
 		DriveConstants.BlueWallToCenterPegDistance));
-	// addSequential(new DeployGear());
+	addParallel(new IntakeDown());
 	addSequential(new DriveDistancePID(DriveConstants.BlueCenterPegBackUpDistance,
 		DriveConstants.BlueCenterPegBackUpDistance));
 
+	addParallel(new IntakeDownSpin());
 	addSequential(new WaitTime(0.3));
 	addSequential(new TurnToAngle(DriveConstants.BlueWallCenterToSecondGearAngle, 4));
 	addSequential(new WaitTime(0.3));
 	addSequential(new DriveDistancePID(DriveConstants.BlueWallCenterToSecondGearDistance,
 		DriveConstants.BlueWallCenterToSecondGearDistance));
-	// addParallel(new IntakeGear());
 
 	addSequential(new DriveDistancePID(-DriveConstants.BlueWallCenterToSecondGearDistance,
 		-DriveConstants.BlueWallCenterToSecondGearDistance));
-	// addParallel(new GearManipUp());
+	addParallel(new IntakeTuckRetain());
 	addSequential(new WaitTime(0.2));
 	addSequential(new TurnToAngle(0, 4));
 	addSequential(new WaitTime(0.1));
@@ -42,8 +46,8 @@ public class BlueCenterPegTwoGearAuto extends CommandGroup {
 	addSequential(new WaitTime(0.4));
 	addSequential(new DriveDistancePID(-DriveConstants.BlueCenterPegBackUpDistance,
 		-DriveConstants.BlueCenterPegBackUpDistance));
-	// addSequential(new DeployGear());
 	addSequential(new DriveTime(0.5, 3));
+	addParallel(new IntakeDown());
     }
 
 }
