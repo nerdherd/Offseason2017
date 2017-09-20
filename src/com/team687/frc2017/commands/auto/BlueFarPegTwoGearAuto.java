@@ -22,6 +22,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class BlueFarPegTwoGearAuto extends CommandGroup {
 
     public BlueFarPegTwoGearAuto() {
+	addParallel(new IntakeTuckRetain());
 	addSequential(new DriveBezierRio(DriveConstants.BluePathWallToFarPeg, -0.687, true, true));
 	addParallel(new IntakeDown());
 	addSequential(new DriveBezierRio(DriveConstants.BluePathFarPegBackUp, 0.687, true, true));
@@ -41,7 +42,7 @@ public class BlueFarPegTwoGearAuto extends CommandGroup {
 	addSequential(new WaitTime(0.2));
 
 	addSequential(new DriveBezierRio(DriveConstants.BluePathWallToFarPeg, -0.687, true, true));
-	// addSequential(new DeployGear());
+	addParallel(new IntakeDown());
 	addSequential(new DriveTime(0.5, 3));
     }
 
