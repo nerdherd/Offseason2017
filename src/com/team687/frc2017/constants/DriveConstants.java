@@ -106,13 +106,21 @@ public class DriveConstants {
     public final static double BlueWallCenterToSecondGearAngle = 90;
     public final static double BlueWallCenterToSecondGearDistance = -0;
 
+    public final static double BlueWallToFarPegTurnPoint = 0;
+    public final static double BlueFarPegTurnPointToFarPeg = 0;
+    public final static double BlueFarPegTurnPointAngle = 0;
     public final static double[] BluePathWallToFarPeg = { 0, 0, 0, 0, 0, 0, 0, 0 };
     public final static double[] BluePathFarPegBackUp = { 0, 0, 0, 0, 0, 0, 0, 0 };
     public final static double BlueWallFarToSecondGearAngle = -90;
     public final static double BlueWallFarToSecondGearDistance = 0;
 
+    public final static double BlueWallToClosePegTurnPoint = 0;
+    public final static double BlueClosePegTurnPointToClosePeg = 0;
+    public final static double BlueClosePegTurnPointAngle = 0;
     public final static double[] BluePathClosePegBackUp = { 0, 0, 0, 0, 0, 0, 0, 0 };
     public final static double BlueWallCloseToSecondGearAngle = -90;
     public final static double BlueWallCloseToSecondGearDistance = 0;
+
+    public final static double kShotDistance = 6.9028871; // in feet (direct from 1678's code)
 
 }
