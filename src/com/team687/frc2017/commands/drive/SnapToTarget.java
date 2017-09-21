@@ -9,7 +9,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * Alignment based on vision and gyro. Ends when the shoot button is released
+ * Alignment based on vision and gyro. In auto, ends when aligned. In teleop,
+ * ends when "wantToShoot" button is released
  * 
  * @author tedlin
  * 

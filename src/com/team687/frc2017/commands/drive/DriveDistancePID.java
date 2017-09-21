@@ -2,9 +2,8 @@ package com.team687.frc2017.commands.drive;
 
 import com.team687.frc2017.Robot;
 import com.team687.frc2017.constants.DriveConstants;
-import com.team687.frc2017.utilities.NerdyMath;
-import com.team687.frc2017.utilities.NerdyPID;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -17,21 +16,45 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveDistancePID extends Command {
 
-    private double m_leftDistance;
     private double m_rightDistance;
-    private NerdyPID m_leftDistPID;
-    private NerdyPID m_rightDistPID;
-    private NerdyPID m_rotPID;
+    private double m_leftDistance;
+    private double m_rightError;
+    private double m_leftError;
 
-    private double m_counter = 0;
+    private double m_startTime;
+    private double m_timeout;
+
+    public DriveDistancePID(double distance) {
+	m_timeout = 1.678;
+	m_rightDistance = distance;
+	m_leftDistance = distance;
+
+	// subsystem dependencies
+	requires(Robot.drive);
+    }
+
+    // /**
+    // * @param distance
+    // * @param timeout
+    // */
+    // public DriveDistancePID(double distance, double timeout) {
+    // m_timeout = timeout;
+    // m_rightDistance = distance;
+    // m_leftDistance = distance;
+    //
+    // // subsystem dependencies
+    // requires(Robot.drive);
+    // }
 
     /**
-     * @param leftDistance
      * @param rightDistance
+     * @param leftDistance
+     * @param timeout
      */
-    public DriveDistancePID(double leftDistance, double rightDistance) {
-	m_leftDistance = leftDistance;
+    public DriveDistancePID(double rightDistance, double leftDistance, double timeout) {
+	m_timeout = timeout;
 	m_rightDistance = rightDistance;
+	m_leftDistance = leftDistance;
 
 	// subsystem dependencies
 	requires(Robot.drive);
@@ -41,50 +64,44 @@ public class DriveDistancePID extends Command {
     protected void initialize() {
 	SmartDashboard.putString("Current Command", "DriveDistancePID");
 
-	m_leftDistPID = new NerdyPID();
-	m_leftDistPID.setPID(DriveConstants.kDistP, DriveConstants.kDistI, DriveConstants.kDistD);
-	m_leftDistPID.setOutputRange(DriveConstants.kMinDistPower, DriveConstants.kMaxDistPower);
-	m_leftDistPID.setGyro(false);
-	m_leftDistPID.setDesired(m_leftDistance);
-
-	m_rightDistPID = new NerdyPID();
-	m_rightDistPID.setPID(DriveConstants.kDistP, DriveConstants.kDistI, DriveConstants.kDistD);
-	m_rightDistPID.setOutputRange(DriveConstants.kMinDistPower, DriveConstants.kMaxDistPower);
-	m_rightDistPID.setGyro(false);
-	m_rightDistPID.setDesired(m_rightDistance);
-
-	m_rotPID = new NerdyPID();
-	m_rotPID.setPID(DriveConstants.kRotP, DriveConstants.kRotI, DriveConstants.kRotD);
-	m_rotPID.setOutputRange(DriveConstants.kMinDistPower, DriveConstants.kMaxDistPower);
-	m_rotPID.setGyro(true);
-	m_rotPID.setDesired(Robot.drive.getCurrentYaw());
-
-	Robot.drive.resetEncoders();
+	Robot.drive.shiftUp();
 	Robot.drive.stopDrive();
-	Robot.drive.shiftDown();
+
+	m_startTime = Timer.getFPGATimestamp();
     }
 
     @Override
     protected void execute() {
-	double lPow = m_leftDistPID.calculate(Robot.drive.getLeftTicks());
-	double rPow = m_rightDistPID.calculate(Robot.drive.getRightTicks());
-	double rotPow = m_rotPID.calculate(Robot.drive.getCurrentYaw());
+	m_rightError = m_rightDistance - Robot.drive.getRightTicks();
+	m_leftError = m_leftDistance - Robot.drive.getLeftTicks();
 
-	double[] pow = { rotPow + lPow, rotPow - rPow };
-	pow = NerdyMath.normalize(pow, false);
-	Robot.drive.setPower(pow[0], pow[1]);
+	double straightRightPower = DriveConstants.kDistP * m_rightError;
+	double straightLeftPower = DriveConstants.kDistP * m_leftError;
 
-	if (Math.abs(Robot.drive.getLeftTicks() - m_leftDistance) <= DriveConstants.kDriveDistanceTolerance
-		&& Math.abs(Robot.drive.getRightTicks() - m_rightDistance) <= DriveConstants.kDriveDistanceTolerance) {
-	    m_counter += 1;
-	} else {
-	    m_counter = 0;
+	double rightSign = Math.signum(straightRightPower);
+	if (Math.abs(straightRightPower) > DriveConstants.kMaxDistPower) {
+	    straightRightPower = DriveConstants.kMaxDistPower * rightSign;
 	}
+	if (Math.abs(straightRightPower) < DriveConstants.kMinDistPower) {
+	    straightRightPower = DriveConstants.kMaxDistPower * rightSign;
+	}
+
+	double leftSign = Math.signum(straightLeftPower);
+	if (Math.abs(straightLeftPower) > DriveConstants.kMaxDistPower) {
+	    straightLeftPower = DriveConstants.kMaxDistPower * leftSign;
+	}
+	if (Math.abs(straightLeftPower) < DriveConstants.kMinDistPower) {
+	    straightLeftPower = DriveConstants.kMaxDistPower * leftSign;
+	}
+
+	Robot.drive.setPower(straightLeftPower, -straightRightPower);
     }
 
     @Override
     protected boolean isFinished() {
-	return m_counter > DriveConstants.kDriveDistanceOscillationCount;
+	boolean reachedGoal = Math.abs(m_leftError) < DriveConstants.kDriveDistanceTolerance
+		&& Math.abs(m_rightError) < DriveConstants.kDriveDistanceTolerance;
+	return reachedGoal || Timer.getFPGATimestamp() - m_startTime > m_timeout;
     }
 
     @Override

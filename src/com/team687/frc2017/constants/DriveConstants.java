@@ -121,6 +121,6 @@ public class DriveConstants {
     public final static double BlueWallCloseToSecondGearAngle = -90;
     public final static double BlueWallCloseToSecondGearDistance = 0;
 
-    public final static double kShotDistance = 6.9028871; // in feet (direct from 1678's code)
+    public final static double kShotDistanceFeet = 6.9028871; // in feet (direct from 1678's code)
 
 }
