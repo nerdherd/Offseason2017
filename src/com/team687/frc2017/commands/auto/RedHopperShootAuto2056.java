@@ -29,7 +29,7 @@ public class RedHopperShootAuto2056 extends CommandGroup {
 
 	// drive to perfectly align with hopper
 	addSequential(new DriveDistancePID(DriveConstants.RedPathDistanceAlignWithHopper,
-		DriveConstants.RedPathDistanceAlignWithHopper));
+		DriveConstants.RedPathDistanceAlignWithHopper, 2));
 
 	// shoot
 	// addParallel(new LiveVisionTracking());

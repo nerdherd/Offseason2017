@@ -19,10 +19,10 @@ public class BlueCenterPegAuto extends CommandGroup {
     public BlueCenterPegAuto() {
 	addSequential(new IntakeTuckRetain());
 	addSequential(new DriveDistancePID(DriveConstants.BlueWallToCenterPegDistance,
-		DriveConstants.BlueWallToCenterPegDistance));
+		DriveConstants.BlueWallToCenterPegDistance, 3));
 	addParallel(new IntakeDown());
 	addSequential(new DriveDistancePID(DriveConstants.BlueCenterPegBackUpDistance,
-		DriveConstants.BlueCenterPegBackUpDistance));
+		DriveConstants.BlueCenterPegBackUpDistance, 3));
     }
 
 }

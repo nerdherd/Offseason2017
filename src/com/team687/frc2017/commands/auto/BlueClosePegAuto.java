@@ -21,12 +21,12 @@ public class BlueClosePegAuto extends CommandGroup {
     public BlueClosePegAuto() {
 	addParallel(new IntakeTuckRetain());
 	addSequential(new DriveDistancePID(DriveConstants.BlueWallToFarPegTurnPoint,
-		DriveConstants.BlueWallToFarPegTurnPoint));
-	addSequential(new TurnToAngle(DriveConstants.BlueFarPegTurnPointAngle));
+		DriveConstants.BlueWallToFarPegTurnPoint, 4));
+	addSequential(new TurnToAngle(DriveConstants.BlueFarPegTurnPointAngle, 4));
 	addSequential(new DriveDistancePID(DriveConstants.BlueFarPegTurnPointToFarPeg,
-		DriveConstants.BlueFarPegTurnPointToFarPeg));
+		DriveConstants.BlueFarPegTurnPointToFarPeg, 4));
 	addParallel(new IntakeDown());
-	addSequential(new DriveTime(0.5, 3));
+	addSequential(new DriveTime(0.687, 3));
     }
 
 }

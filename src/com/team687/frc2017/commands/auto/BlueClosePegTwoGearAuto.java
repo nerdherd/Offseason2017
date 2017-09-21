@@ -29,16 +29,16 @@ public class BlueClosePegTwoGearAuto extends CommandGroup {
 	addSequential(new WaitTime(0.2));
 
 	addSequential(new IntakeDownSpin());
-	addSequential(new TurnToAngle(DriveConstants.BlueWallCloseToSecondGearAngle, 4));
+	addSequential(new TurnToAngle(DriveConstants.BlueWallCloseToSecondGearAngle, 3));
 	addSequential(new WaitTime(0.2));
 	addSequential(new DriveDistancePID(DriveConstants.BlueWallCloseToSecondGearDistance,
-		DriveConstants.BlueWallCloseToSecondGearDistance));
+		DriveConstants.BlueWallCloseToSecondGearDistance, 3));
 	addSequential(new WaitTime(0.2));
 	addSequential(new DriveDistancePID(-DriveConstants.BlueWallCloseToSecondGearDistance,
-		-DriveConstants.BlueWallCloseToSecondGearDistance));
+		-DriveConstants.BlueWallCloseToSecondGearDistance, 3));
 	addSequential(new WaitTime(0.2));
 	addParallel(new IntakeTuckRetain());
-	addSequential(new TurnToAngle(0, 4));
+	addSequential(new TurnToAngle(0, 3));
 	addSequential(new WaitTime(0.2));
 
 	addSequential(new DriveBezierRio(DriveConstants.BluePathWallToClosePeg, -0.687, true, true));

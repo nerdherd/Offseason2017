@@ -20,20 +20,20 @@ public class RedCenterPegTwoGearAuto extends CommandGroup {
 
     public RedCenterPegTwoGearAuto() {
 	addSequential(new DriveDistancePID(DriveConstants.RedWallToCenterPegDistance,
-		DriveConstants.RedWallToCenterPegDistance));
+		DriveConstants.RedWallToCenterPegDistance, 3));
 	// addSequential(new DeployGear());
 	addSequential(new DriveDistancePID(DriveConstants.RedCenterPegBackUpDistance,
-		DriveConstants.RedCenterPegBackUpDistance));
+		DriveConstants.RedCenterPegBackUpDistance, 3));
 
 	addSequential(new WaitTime(0.3));
-	addSequential(new TurnToAngle(DriveConstants.RedWallToSecondGearAngle, 4));
+	addSequential(new TurnToAngle(DriveConstants.RedWallToSecondGearAngle, 3));
 	addSequential(new WaitTime(0.3));
 	addSequential(new DriveDistancePID(DriveConstants.RedWallToSecondGearDistance,
-		DriveConstants.RedWallToSecondGearDistance));
+		DriveConstants.RedWallToSecondGearDistance, 3));
 	// addParallel(new IntakeGear());
 
 	addSequential(new DriveDistancePID(-DriveConstants.RedWallToSecondGearDistance,
-		-DriveConstants.RedWallToSecondGearDistance));
+		-DriveConstants.RedWallToSecondGearDistance, 3));
 	// addParallel(new GearManipUp());
 	addSequential(new WaitTime(0.2));
 	addSequential(new TurnToAngle(0, 4));
@@ -41,7 +41,7 @@ public class RedCenterPegTwoGearAuto extends CommandGroup {
 	addSequential(new SnapToTarget(true, 2));
 	addSequential(new WaitTime(0.4));
 	addSequential(new DriveDistancePID(-DriveConstants.RedCenterPegBackUpDistance,
-		-DriveConstants.RedCenterPegBackUpDistance));
+		-DriveConstants.RedCenterPegBackUpDistance, 3));
 	// addSequential(new DeployGear());
 	addSequential(new DriveTime(0.5, 3));
     }
