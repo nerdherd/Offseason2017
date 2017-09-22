@@ -1,11 +1,9 @@
 package com.team687.frc2017.commands.auto;
 
-import com.team687.frc2017.commands.drive.AlignDistanceToTarget;
 import com.team687.frc2017.commands.drive.ArcTurn;
 import com.team687.frc2017.commands.drive.DriveStraightContinuous;
 import com.team687.frc2017.commands.drive.DriveTime;
 import com.team687.frc2017.commands.drive.DriveUntilCollision;
-import com.team687.frc2017.commands.drive.SnapToTarget;
 import com.team687.frc2017.commands.drive.WaitTime;
 import com.team687.frc2017.constants.DriveConstants;
 
@@ -43,8 +41,8 @@ public class BlueHopperShootAuto973 extends CommandGroup {
 	addSequential(new ArcTurn(DriveConstants.BlueHopperToBoilerAngle, false, 0));
 
 	// aim and shoot
-	addSequential(new SnapToTarget(true));
-	addParallel(new AlignDistanceToTarget(3.3));
+	// addSequential(new SnapToTarget(true));
+	// addParallel(new AlignDistanceToTarget(3.3));
 	// addParallel(new Shoot());
     }
 

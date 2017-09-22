@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * Arc turning
+ * Arc turning to absolute angle
  * 
  * @author tedlin
  *

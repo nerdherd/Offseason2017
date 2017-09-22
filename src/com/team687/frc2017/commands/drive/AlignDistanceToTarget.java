@@ -50,7 +50,7 @@ public class AlignDistanceToTarget extends Command {
 	double robotInchesFromTarget = Robot.visionAdapter.getDistanceFromTarget();
 	m_error = NerdyMath.feetToInches(DriveConstants.kShotDistanceFeet) - robotInchesFromTarget;
 
-	double straightPower = DriveConstants.kDistP * m_error;
+	double straightPower = DriveConstants.kDistP * m_error; // kP here is for inches
 	double sign = Math.signum(straightPower);
 	if (Math.abs(straightPower) > DriveConstants.kMaxDistPower) {
 	    straightPower = DriveConstants.kMaxDistPower * sign;

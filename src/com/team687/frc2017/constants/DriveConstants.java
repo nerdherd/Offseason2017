@@ -19,7 +19,7 @@ public class DriveConstants {
     public final static double kDistF = 0;
     public final static double kDistP = 0.001;
     public final static double kMinDistPower = 0;
-    public final static double kMaxDistPower = 1.0;
+    public final static double kMaxDistPower = 0.971;
     public final static double kDistI = 0;
     public final static double kDistD = 0;
     public final static double kDriveDistanceTolerance = 205.6;
@@ -101,21 +101,26 @@ public class DriveConstants {
     public final static double[] BluePathWallToHopper2056 = { 0, 0, -39000, 40000, -39000, 64000, -39000, 101000 };
     public final static double BluePathDistanceAlignWithHopper = 20000;
 
-    public final static double BlueWallToCenterPegDistance = -0;
+    public final static double BlueWallToCenterPegDistance = -0; // remember orientation with gear intake in front means
+								 // going backwards
     public final static double BlueCenterPegBackUpDistance = 0;
     public final static double BlueWallCenterToSecondGearAngle = 90;
     public final static double BlueWallCenterToSecondGearDistance = -0;
+    public final static double[] BluePathCenterPegToBoiler = { 0, 0, 0, 0, 0, 0, 0, 0 };
+    public final static double BlueWallCenterToTurnPoint = 0;
+    public final static double BlueCenterToBoilerTurnPointAngle = 0;
+    public final static double BlueCenterTurnPointToBoiler = 0;
 
-    public final static double BlueWallToFarPegTurnPoint = 0;
-    public final static double BlueFarPegTurnPointToFarPeg = 0;
+    public final static double BlueWallToFarPegTurnPoint = -0;
+    public final static double BlueFarPegTurnPointToFarPeg = -0;
     public final static double BlueFarPegTurnPointAngle = 0;
     public final static double[] BluePathWallToFarPeg = { 0, 0, 0, 0, 0, 0, 0, 0 };
     public final static double[] BluePathFarPegBackUp = { 0, 0, 0, 0, 0, 0, 0, 0 };
     public final static double BlueWallFarToSecondGearAngle = -90;
     public final static double BlueWallFarToSecondGearDistance = 0;
 
-    public final static double BlueWallToClosePegTurnPoint = 0;
-    public final static double BlueClosePegTurnPointToClosePeg = 0;
+    public final static double BlueWallToClosePegTurnPoint = -0;
+    public final static double BlueClosePegTurnPointToClosePeg = -0;
     public final static double BlueClosePegTurnPointAngle = 0;
     public final static double[] BluePathClosePegBackUp = { 0, 0, 0, 0, 0, 0, 0, 0 };
     public final static double BlueWallCloseToSecondGearAngle = -90;

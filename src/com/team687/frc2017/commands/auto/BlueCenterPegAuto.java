@@ -17,12 +17,12 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class BlueCenterPegAuto extends CommandGroup {
 
     public BlueCenterPegAuto() {
-	addSequential(new IntakeTuckRetain());
+	addParallel(new IntakeTuckRetain());
 	addSequential(new DriveDistancePID(DriveConstants.BlueWallToCenterPegDistance,
-		DriveConstants.BlueWallToCenterPegDistance, 3));
+		DriveConstants.BlueWallToCenterPegDistance, 4));
 	addParallel(new IntakeDown());
 	addSequential(new DriveDistancePID(DriveConstants.BlueCenterPegBackUpDistance,
-		DriveConstants.BlueCenterPegBackUpDistance, 3));
+		DriveConstants.BlueCenterPegBackUpDistance, 4));
     }
 
 }
