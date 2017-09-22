@@ -50,13 +50,10 @@ public class TurnToAngle extends Command {
     protected void initialize() {
 	SmartDashboard.putString("Current Command", "TurnToAngle");
 	m_startTime = Timer.getFPGATimestamp();
-	// m_rotPID = new NerdyPID(Constants.kRotP, Constants.kRotI, Constants.kRotD);
-	// m_rotPID.setOutputRange(Constants.kMinRotPower, Constants.kMaxRotPower);
-	// m_rotPID.setDesired(m_angleToTurn);
-	// m_rotPID.setGyro(true);
 
 	Robot.drive.shiftUp();
-	m_kP = DriveConstants.kRotP;
+	// m_kP = DriveConstants.kRotP;
+	m_kP = SmartDashboard.getNumber("***** Rot P ********", 0);
 	m_minRotPower = DriveConstants.kMinRotPower;
     }
 
@@ -65,7 +62,6 @@ public class TurnToAngle extends Command {
 	double robotAngle = (360 - Robot.drive.getCurrentYaw()) % 360;
 	error = m_angleToTurn - robotAngle;
 	SmartDashboard.putNumber("Angle Error", error);
-	// double power = m_rotPID.calculate(Robot.drive.getCurrentYaw());
 	double power = m_kP * error;
 	double sign = Math.signum(power);
 	if (Math.abs(power) < m_minRotPower) {
