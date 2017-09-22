@@ -10,23 +10,23 @@ import com.team687.frc2017.constants.DriveConstants;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- * Blue far peg auto
+ * Close peg single gear auto
  * 
  * @author tedlin
  *
  */
 
-public class BlueFarPegAuto extends CommandGroup {
+public class BlueClosePegGearAuto extends CommandGroup {
 
-    public BlueFarPegAuto() {
+    public BlueClosePegGearAuto() {
 	addParallel(new IntakeTuckRetain());
-	addSequential(new DriveDistancePID(DriveConstants.BlueWallToClosePegTurnPoint,
-		DriveConstants.BlueWallToClosePegTurnPoint, 4));
-	addSequential(new TurnToAngle(DriveConstants.BlueClosePegTurnPointAngle, 4));
-	addSequential(new DriveDistancePID(DriveConstants.BlueClosePegTurnPointToClosePeg,
-		DriveConstants.BlueClosePegTurnPointToClosePeg, 4));
+	addSequential(new DriveDistancePID(DriveConstants.BlueWallToFarPegTurnPoint,
+		DriveConstants.BlueWallToFarPegTurnPoint, 4));
+	addSequential(new TurnToAngle(DriveConstants.BlueFarPegTurnPointAngle, 4));
+	addSequential(new DriveDistancePID(DriveConstants.BlueFarPegTurnPointToFarPeg,
+		DriveConstants.BlueFarPegTurnPointToFarPeg, 4));
 	addParallel(new IntakeDown());
-	addSequential(new DriveTime(0.5, 3));
+	addSequential(new DriveTime(0.687, 3));
     }
 
 }

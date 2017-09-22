@@ -14,9 +14,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  *
  */
 
-public class BlueCenterPegAuto extends CommandGroup {
+public class BlueCenterPegGearAuto extends CommandGroup {
 
-    public BlueCenterPegAuto() {
+    public BlueCenterPegGearAuto() {
 	addParallel(new IntakeTuckRetain());
 	addSequential(new DriveDistancePID(DriveConstants.BlueWallToCenterPegDistance,
 		DriveConstants.BlueWallToCenterPegDistance, 4));

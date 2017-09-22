@@ -1,10 +1,8 @@
 package com.team687.frc2017;
 
-import com.team687.frc2017.commands.auto.BlueCenterPegAuto;
+import com.team687.frc2017.commands.auto.BlueCenterPegGearAuto;
+import com.team687.frc2017.commands.auto.BlueCenterPegGearShootAuto;
 import com.team687.frc2017.commands.auto.BlueCenterPegTwoGearAuto;
-import com.team687.frc2017.commands.auto.BlueGearHopperShootAuto254;
-import com.team687.frc2017.commands.auto.BlueHopperShootAuto1678;
-import com.team687.frc2017.commands.auto.BlueHopperShootAuto2056;
 import com.team687.frc2017.commands.auto.BlueHopperShootAuto973;
 import com.team687.frc2017.commands.drive.ArcTurn;
 import com.team687.frc2017.commands.drive.DriveUntilCollision;
@@ -108,8 +106,10 @@ public class OI {
 
 	SmartDashboard.putData("Shift Up", new ShiftUp());
 	SmartDashboard.putData("Shift Down", new ShiftDown());
-	SmartDashboard.putData("Drive until Collision", new DriveUntilCollision(0.687, 1.95));
+	SmartDashboard.putData("Drive until Collision", new DriveUntilCollision(0.971, 0.987));
 
+	SmartDashboard.putData("Rotate to SmartDashboard angle (test)",
+		new TurnToAngle(SmartDashboard.getNumber("******Desired Angle*******", 0)));
 	SmartDashboard.putData("Rotate to 90", new TurnToAngle(DriveConstants.BlueWallToHopperArcTurnAngle));
 	SmartDashboard.putData("Arc to 90", new ArcTurn(DriveConstants.BlueWallToHopperArcTurnAngle, true, 0));
 
@@ -122,11 +122,15 @@ public class OI {
 	SmartDashboard.putData("Intake gear", new SpinSpeed(GearIntakeConstants.kGearIntakeSpinVoltage));
 
 	SmartDashboard.putData("Blue 973 Hopper Auto", new BlueHopperShootAuto973());
-	SmartDashboard.putData("Blue 1678 Hopper Auto", new BlueHopperShootAuto1678());
-	SmartDashboard.putData("Blue 2056 Hopper Auto", new BlueHopperShootAuto2056());
-	SmartDashboard.putData("Blue 254 Gear + Hopper Auto", new BlueGearHopperShootAuto254());
-	SmartDashboard.putData("Blue Center Peg Auto", new BlueCenterPegAuto());
+	// SmartDashboard.putData("Blue 1678 Hopper Auto", new
+	// BlueHopperShootAuto1678());
+	// SmartDashboard.putData("Blue 2056 Hopper Auto", new
+	// BlueHopperShootAuto2056());
+	// SmartDashboard.putData("Blue 254 Gear + Hopper Auto", new
+	// BlueGearHopperShootAuto254());
+	SmartDashboard.putData("Blue Center Peg Gear Auto", new BlueCenterPegGearAuto());
 	SmartDashboard.putData("Blue Center Peg Two Gear Auto", new BlueCenterPegTwoGearAuto());
+	SmartDashboard.putData("Blue Center Peg Gear + Shoot Auto", new BlueCenterPegGearShootAuto());
 	// SmartDashboard.putData("Red 973 Hopper Auto", new RedHopperShootAuto973());
 	// SmartDashboard.putData("Red 1678 Hopper Auto", new RedHopperShootAuto1678());
 	// SmartDashboard.putData("Red 2056 Hopper Auto", new RedHopperShootAuto2056());
