@@ -17,7 +17,7 @@ public class DriveConstants {
 
     // Distance PID
     public final static double kDistF = 0;
-    public final static double kDistP = 0.001;
+    public final static double kDistP = 0.00001;
     public final static double kMinDistPower = 0;
     public final static double kMaxDistPower = 0.971;
     public final static double kDistI = 0;
@@ -26,7 +26,7 @@ public class DriveConstants {
     public final static double kDriveDistanceOscillationCount = 5;
 
     // Rotation PID
-    public final static double kRotP = 0.05;
+    public final static double kRotP = 0.014;
     public final static double kMinRotPower = 0.254;
     public final static double kMaxRotPower = 0.971;
     public final static double kRotI = 0;
@@ -101,8 +101,8 @@ public class DriveConstants {
     public final static double[] BluePathWallToHopper2056 = { 0, 0, -39000, 40000, -39000, 64000, -39000, 101000 };
     public final static double BluePathDistanceAlignWithHopper = 20000;
 
-    public final static double BlueWallToCenterPegDistance = -0; // remember orientation with gear intake in front means
-								 // going backwards
+    public final static double BlueWallToCenterPegDistance = -67000; // remember orientation with gear intake in front
+								     // means going backwards
     public final static double BlueCenterPegBackUpDistance = 0;
     public final static double BlueWallCenterToSecondGearAngle = 90;
     public final static double BlueWallCenterToSecondGearDistance = -0;

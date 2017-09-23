@@ -20,13 +20,12 @@ public class DriveDistancePID extends Command {
     private double m_leftDistance;
     private double m_rightError;
     private double m_leftError;
-    private double m_sign;
 
     private double m_startTime;
     private double m_timeout;
 
     public DriveDistancePID(double distance) {
-	m_timeout = 1.678;
+	m_timeout = 10;
 	m_rightDistance = distance;
 	m_leftDistance = distance;
 
@@ -65,8 +64,6 @@ public class DriveDistancePID extends Command {
     protected void initialize() {
 	SmartDashboard.putString("Current Command", "DriveDistancePID");
 
-	m_sign = Math.signum(m_rightDistance);
-
 	Robot.drive.shiftUp();
 	Robot.drive.stopDrive();
 	Robot.drive.resetEncoders();
@@ -75,11 +72,11 @@ public class DriveDistancePID extends Command {
 
     @Override
     protected void execute() {
-	m_rightError = Math.abs(m_rightDistance - Robot.drive.getRightTicks());
-	m_leftError = Math.abs(m_leftDistance - Robot.drive.getLeftTicks());
+	m_rightError = m_rightDistance - Robot.drive.getRightTicks();
+	m_leftError = m_leftDistance - Robot.drive.getLeftTicks();
 
-	double straightRightPower = DriveConstants.kDistP * m_rightError * m_sign;
-	double straightLeftPower = DriveConstants.kDistP * m_leftError * m_sign;
+	double straightRightPower = DriveConstants.kDistP * m_rightError;
+	double straightLeftPower = DriveConstants.kDistP * m_leftError;
 
 	double rightSign = Math.signum(straightRightPower);
 	if (Math.abs(straightRightPower) > DriveConstants.kMaxDistPower) {
@@ -102,8 +99,8 @@ public class DriveDistancePID extends Command {
 
     @Override
     protected boolean isFinished() {
-	boolean reachedGoal = m_leftError < DriveConstants.kDriveDistanceTolerance
-		&& m_rightError < DriveConstants.kDriveDistanceTolerance;
+	boolean reachedGoal = Math.abs(m_leftError) < DriveConstants.kDriveDistanceTolerance
+		&& Math.abs(m_rightError) < DriveConstants.kDriveDistanceTolerance;
 	return reachedGoal || Timer.getFPGATimestamp() - m_startTime > m_timeout;
     }
 

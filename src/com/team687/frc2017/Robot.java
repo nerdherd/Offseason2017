@@ -42,8 +42,9 @@ public class Robot extends IterativeRobot {
 
 	oi = new OI();
 
-	// displays which command is running on Drive
+	// displays which command is running on each subsystem
 	SmartDashboard.putData(drive);
+	SmartDashboard.putData(gearIntake);
 
 	visionAdapter = VisionAdapter.getInstance();
     }
@@ -53,6 +54,7 @@ public class Robot extends IterativeRobot {
 	Scheduler.getInstance().removeAll();
 	drive.reportToSmartDashboard();
 	visionAdapter.reportToSmartDashboard();
+	gearIntake.reportState();
     }
 
     @Override
@@ -60,6 +62,7 @@ public class Robot extends IterativeRobot {
 	Scheduler.getInstance().run();
 	drive.reportToSmartDashboard();
 	visionAdapter.reportToSmartDashboard();
+	gearIntake.reportState();
     }
 
     @Override
@@ -67,6 +70,7 @@ public class Robot extends IterativeRobot {
 	Scheduler.getInstance().removeAll();
 	drive.reportToSmartDashboard();
 	visionAdapter.reportToSmartDashboard();
+	gearIntake.reportState();
     }
 
     @Override
@@ -75,6 +79,7 @@ public class Robot extends IterativeRobot {
 
 	drive.reportToSmartDashboard();
 	visionAdapter.reportToSmartDashboard();
+	gearIntake.reportState();
 	SmartDashboard.putData("PDP", pdp);
     }
 
@@ -83,6 +88,7 @@ public class Robot extends IterativeRobot {
 	Scheduler.getInstance().removeAll();
 	visionAdapter.reportToSmartDashboard();
 	drive.reportToSmartDashboard();
+	gearIntake.reportState();
     }
 
     @Override
@@ -90,6 +96,7 @@ public class Robot extends IterativeRobot {
 	Scheduler.getInstance().run();
 	drive.reportToSmartDashboard();
 	visionAdapter.reportToSmartDashboard();
+	gearIntake.reportState();
 	SmartDashboard.putData("PDP", pdp);
     }
 
@@ -98,6 +105,7 @@ public class Robot extends IterativeRobot {
 	LiveWindow.run();
 	drive.reportToSmartDashboard();
 	visionAdapter.reportToSmartDashboard();
+	gearIntake.reportState();
 	SmartDashboard.putData("PDP", pdp);
     }
 }

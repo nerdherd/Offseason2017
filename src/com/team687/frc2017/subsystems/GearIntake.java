@@ -5,6 +5,7 @@ import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
 import com.team687.frc2017.Robot;
 import com.team687.frc2017.RobotMap;
+import com.team687.frc2017.commands.gear.IntakeSetPosition;
 import com.team687.frc2017.constants.GearIntakeConstants;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -69,7 +70,6 @@ public class GearIntake extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-	// setDefaultCommand(new
-	// IntakeSetPosition(GearIntakeConstants.kGearIntakeUpPos));
+	setDefaultCommand(new IntakeSetPosition(getPos()));
     }
 }
