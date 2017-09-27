@@ -8,6 +8,7 @@ import com.team687.frc2017.RobotMap;
 import com.team687.frc2017.commands.gear.IntakeSetPosition;
 import com.team687.frc2017.constants.GearIntakeConstants;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -23,6 +24,11 @@ public class GearIntake extends Subsystem {
 	m_gearSpin = new CANTalon(RobotMap.gearSpinPort);
 
 	m_gearArtic.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Absolute);
+	CANTalon.FeedbackDeviceStatus gearArticSensorPresent = m_gearArtic
+		.isSensorPresent(FeedbackDevice.CtreMagEncoder_Absolute);
+	if (gearArticSensorPresent != CANTalon.FeedbackDeviceStatus.FeedbackStatusPresent) {
+	    DriverStation.reportError("Gear artic encoder not found: " + gearArticSensorPresent, false);
+	}
 
 	m_gearArtic.setP(GearIntakeConstants.kGearIntakeP);
 	m_gearArtic.setI(GearIntakeConstants.kGearIntakeI);
