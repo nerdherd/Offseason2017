@@ -103,9 +103,9 @@ public class DriveConstants {
 
     public final static double BlueWallToCenterPegDistance = -67000; // remember orientation with gear intake in front
 								     // means going backwards
-    public final static double BlueCenterPegBackUpDistance = 0;
+    public final static double BlueCenterPegBackUpDistance = 63000;
     public final static double BlueWallCenterToSecondGearAngle = 90;
-    public final static double BlueWallCenterToSecondGearDistance = -0;
+    public final static double BlueWallCenterToSecondGearDistance = -70000;
     public final static double[] BluePathCenterPegToBoiler = { 0, 0, 0, 0, 0, 0, 0, 0 };
     public final static double BlueWallCenterToTurnPoint = 0;
     public final static double BlueCenterToBoilerTurnPointAngle = 0;

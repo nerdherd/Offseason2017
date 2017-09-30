@@ -125,6 +125,10 @@ public class Drive extends Subsystem {
 	m_brakeModeOn = enabled;
     }
 
+    public boolean getBrakeMode() {
+	return m_brakeModeOn;
+    }
+
     public double squareInput(double input) {
 	return Math.pow(input, 2) * (input / Math.abs(input));
     }

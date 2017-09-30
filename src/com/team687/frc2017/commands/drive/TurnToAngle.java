@@ -19,7 +19,7 @@ public class TurnToAngle extends Command {
     private double m_angleToTurn;
     private double m_startTime;
     private double m_timeout;
-    private double error;
+    private double m_error;
     private double m_kP;
 
     public TurnToAngle(double angle) {
@@ -48,16 +48,18 @@ public class TurnToAngle extends Command {
 	m_startTime = Timer.getFPGATimestamp();
 
 	Robot.drive.shiftUp();
-	// m_kP = DriveConstants.kRotP;
-	m_kP = SmartDashboard.getNumber("***** Rot P ********", 0);
+	m_kP = DriveConstants.kRotP;
+	// m_kP = SmartDashboard.getNumber("***** Rot P ********", 0);
     }
 
     @Override
     protected void execute() {
 	double robotAngle = (360 - Robot.drive.getCurrentYaw()) % 360;
-	error = m_angleToTurn - robotAngle;
-	SmartDashboard.putNumber("Angle Error", error);
-	double power = m_kP * error;
+	m_error = m_angleToTurn - robotAngle;
+	m_error = (m_error > 180) ? m_error - 360 : m_error;
+	m_error = (m_error < -180) ? m_error + 360 : m_error;
+	SmartDashboard.putNumber("Angle Error", m_error);
+	double power = m_kP * m_error;
 
 	double sign = Math.signum(power);
 	if (Math.abs(power) > DriveConstants.kMaxRotPower) {
@@ -72,7 +74,7 @@ public class TurnToAngle extends Command {
 
     @Override
     protected boolean isFinished() {
-	return Math.abs(error) <= DriveConstants.kDriveRotationTolerance
+	return Math.abs(m_error) <= DriveConstants.kDriveRotationTolerance
 		|| Timer.getFPGATimestamp() - m_startTime > m_timeout;
     }
 

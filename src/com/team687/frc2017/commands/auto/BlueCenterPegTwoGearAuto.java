@@ -37,16 +37,16 @@ public class BlueCenterPegTwoGearAuto extends CommandGroup {
 
 	addSequential(new DriveDistancePID(-DriveConstants.BlueWallCenterToSecondGearDistance,
 		-DriveConstants.BlueWallCenterToSecondGearDistance, 3));
-	addParallel(new IntakeTuckRetain());
 	addSequential(new WaitTime(0.2));
 	addSequential(new TurnToAngle(0, 4));
 	addSequential(new WaitTime(0.1));
 	// addSequential(new SnapToTarget(true, 2));
 	addSequential(new WaitTime(0.3));
+	addParallel(new IntakeTuckRetain());
 	addSequential(new DriveDistancePID(-DriveConstants.BlueCenterPegBackUpDistance,
 		-DriveConstants.BlueCenterPegBackUpDistance, 2));
 	addParallel(new IntakeDown());
-	addSequential(new DriveTime(-0.5, 3));
+	addSequential(new DriveTime(0.5, 3));
     }
 
 }
