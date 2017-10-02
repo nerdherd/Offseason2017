@@ -101,9 +101,9 @@ public class DriveConstants {
     public final static double[] BluePathWallToHopper2056 = { 0, 0, -39000, 40000, -39000, 64000, -39000, 101000 };
     public final static double BluePathDistanceAlignWithHopper = 20000;
 
-    public final static double BlueWallToCenterPegDistance = -67000; // remember orientation with gear intake in front
+    public final static double BlueWallToCenterPegDistance = -70000; // remember orientation with gear intake in front
 								     // means going backwards
-    public final static double BlueCenterPegBackUpDistance = 63000;
+    public final static double BlueCenterPegBackUpDistance = 66000;
     public final static double BlueWallCenterToSecondGearAngle = 90;
     public final static double BlueWallCenterToSecondGearDistance = -70000;
     public final static double[] BluePathCenterPegToBoiler = { 0, 0, 0, 0, 0, 0, 0, 0 };

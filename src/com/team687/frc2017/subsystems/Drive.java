@@ -340,12 +340,12 @@ public class Drive extends Subsystem {
 
 	SmartDashboard.putBoolean("Brake Mode On", m_brakeModeOn);
 
-	SmartDashboard.putNumber("Left Master Power", m_leftMaster.getOutputVoltage() / 12);
-	SmartDashboard.putNumber("Left Slave 1 Power", m_leftSlave1.getOutputVoltage() / 12);
-	SmartDashboard.putNumber("Left Slave 2 Power", m_leftSlave2.getOutputVoltage() / 12);
-	SmartDashboard.putNumber("Right Master Power", m_rightMaster.getOutputVoltage() / 12);
-	SmartDashboard.putNumber("Right Slave 1 Power", m_rightSlave1.getOutputVoltage() / 12);
-	SmartDashboard.putNumber("Right Slave 2 Power", m_rightSlave2.getOutputVoltage() / 12);
+	SmartDashboard.putNumber("Left Master PercentVbus", m_leftMaster.getOutputVoltage() / 12);
+	SmartDashboard.putNumber("Left Slave 1 PercentVbus", m_leftSlave1.getOutputVoltage() / 12);
+	SmartDashboard.putNumber("Left Slave 2 PercentVbus", m_leftSlave2.getOutputVoltage() / 12);
+	SmartDashboard.putNumber("Right Master PercentVbus", m_rightMaster.getOutputVoltage() / 12);
+	SmartDashboard.putNumber("Right Slave 1 PercentVbus", m_rightSlave1.getOutputVoltage() / 12);
+	SmartDashboard.putNumber("Right Slave 2 PercentVbus", m_rightSlave2.getOutputVoltage() / 12);
 
 	// m_currentTime = Timer.getFPGATimestamp() - m_initTime;
 	// m_table.putNumber("CURRENT_TIME", m_currentTime);

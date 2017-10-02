@@ -38,6 +38,8 @@ public class GearIntake extends Subsystem {
 	m_gearSpin.changeControlMode(TalonControlMode.Voltage);
 
 	m_lastPos = m_gearArtic.getPosition();
+
+	SmartDashboard.putNumber("initial m_lastPos***", m_lastPos);
     }
 
     public void setSpinVoltage(double pow) {
@@ -72,6 +74,9 @@ public class GearIntake extends Subsystem {
     public void reportState() {
 	SmartDashboard.putNumber("Gear Artic Pos", m_gearArtic.getPosition());
 	SmartDashboard.putNumber("Gear Spin Speed", m_gearSpin.getSpeed());
+
+	SmartDashboard.putNumber("Gear Artic PercentVbus", m_gearArtic.getOutputVoltage() / 12);
+	SmartDashboard.putNumber("Gear Artic Current", m_gearArtic.getOutputCurrent());
     }
 
     @Override
