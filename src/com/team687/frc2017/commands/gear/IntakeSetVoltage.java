@@ -8,6 +8,11 @@ public class IntakeSetVoltage extends Command {
 
     private double m_pow;
 
+    /**
+     * 0 V to 12 V
+     * 
+     * @param pow
+     */
     public IntakeSetVoltage(double pow) {
 	requires(Robot.gearIntake);
 	m_pow = pow;
