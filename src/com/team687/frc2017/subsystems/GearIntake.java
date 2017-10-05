@@ -39,7 +39,8 @@ public class GearIntake extends Subsystem {
 
 	m_lastPos = m_gearArtic.getPosition();
 
-	SmartDashboard.putNumber("initial m_lastPos***", m_lastPos);
+	SmartDashboard.putNumber("initial m_lastPos***", m_lastPos); // this should be the same (or really close to)
+								     // Gear Artic Pos
     }
 
     public void setSpinVoltage(double pow) {
@@ -55,6 +56,12 @@ public class GearIntake extends Subsystem {
 	m_gearArtic.changeControlMode(TalonControlMode.Position);
 	m_target = pos * GearIntakeConstants.kIntakeAlpha + m_lastPos * (1 - GearIntakeConstants.kIntakeAlpha);
 	m_lastPos = m_target;
+	if (m_target < GearIntakeConstants.kGearIntakeDownPos) {
+	    m_target = GearIntakeConstants.kGearIntakeDownPos;
+	}
+	if (m_target > GearIntakeConstants.kGearIntakeTuckedPos) {
+	    m_target = GearIntakeConstants.kGearIntakeTuckedPos;
+	}
 	m_gearArtic.set(m_target);
     }
 
