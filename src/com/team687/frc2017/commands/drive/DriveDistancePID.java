@@ -16,13 +16,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveDistancePID extends Command {
 
-    private double m_rightDistance;
-    private double m_leftDistance;
-    private double m_rightError;
-    private double m_leftError;
+    private double m_rightDistance, m_leftDistance;
+    private double m_rightError, m_leftError;
 
-    private double m_startTime;
-    private double m_timeout;
+    private double m_startTime, m_timeout;
 
     public DriveDistancePID(double distance) {
 	m_timeout = 10;
@@ -32,19 +29,6 @@ public class DriveDistancePID extends Command {
 	// subsystem dependencies
 	requires(Robot.drive);
     }
-
-    // /**
-    // * @param distance
-    // * @param timeout
-    // */
-    // public DriveDistancePID(double distance, double timeout) {
-    // m_timeout = timeout;
-    // m_rightDistance = distance;
-    // m_leftDistance = distance;
-    //
-    // // subsystem dependencies
-    // requires(Robot.drive);
-    // }
 
     /**
      * @param rightDistance

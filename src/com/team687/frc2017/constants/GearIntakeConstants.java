@@ -1,6 +1,7 @@
 package com.team687.frc2017.constants;
 
 public class GearIntakeConstants {
+
     public static final double kGearIntakeTolerance = 0.1;
 
     public static final double kGearIntakeP = 9;
@@ -18,4 +19,5 @@ public class GearIntakeConstants {
     public static final double kGearIntakeSpinVoltage = -12;
     public static final double kGearIntakeSpinHoldVoltage = 6;
     public static final double kGearOuttakeSpinVoltage = 2;
+
 }

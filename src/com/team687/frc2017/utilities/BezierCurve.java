@@ -109,27 +109,27 @@ public class BezierCurve {
 	}
     }
 
-    public ArrayList<Double> getXPoints() {
+    public ArrayList<Double> getXPointList() {
 	return m_xPoints;
     }
 
-    public ArrayList<Double> getYPoints() {
+    public ArrayList<Double> getYPointList() {
 	return m_yPoints;
     }
 
-    public ArrayList<Double> getArcLength() {
+    public ArrayList<Double> getArcLengthList() {
 	return m_arcLength;
     }
 
-    public ArrayList<Double> getHeading() {
+    public ArrayList<Double> getHeadingList() {
 	return m_heading;
     }
 
-    public double[] getXParam() {
+    public double[] getXParamArray() {
 	return m_xVal;
     }
 
-    public double[] getYParam() {
+    public double[] getYParamArray() {
 	return m_yVal;
     }
 

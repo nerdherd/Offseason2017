@@ -17,10 +17,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class TurnToAngle extends Command {
 
     private double m_angleToTurn;
-    private double m_startTime;
-    private double m_timeout;
+    private double m_startTime, m_timeout;
     private double m_error;
-    private double m_kP;
 
     public TurnToAngle(double angle) {
 	m_angleToTurn = angle;
@@ -48,8 +46,6 @@ public class TurnToAngle extends Command {
 	m_startTime = Timer.getFPGATimestamp();
 
 	Robot.drive.shiftUp();
-	m_kP = DriveConstants.kRotP;
-	// m_kP = SmartDashboard.getNumber("***** Rot P ********", 0);
     }
 
     @Override
@@ -58,8 +54,7 @@ public class TurnToAngle extends Command {
 	m_error = m_angleToTurn - robotAngle;
 	m_error = (m_error > 180) ? m_error - 360 : m_error;
 	m_error = (m_error < -180) ? m_error + 360 : m_error;
-	SmartDashboard.putNumber("Angle Error", m_error);
-	double power = m_kP * m_error;
+	double power = DriveConstants.kRotP * m_error;
 
 	double sign = Math.signum(power);
 	if (Math.abs(power) > DriveConstants.kMaxRotPower) {
@@ -68,7 +63,6 @@ public class TurnToAngle extends Command {
 	if (Math.abs(power) < DriveConstants.kMinRotPower) {
 	    power = DriveConstants.kMinRotPower * sign;
 	}
-
 	Robot.drive.setPower(power, power);
     }
 

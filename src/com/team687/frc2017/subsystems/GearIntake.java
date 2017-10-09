@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class GearIntake extends Subsystem {
+
     private CANTalon m_gearArtic;
     private CANTalon m_gearSpin;
 
@@ -20,8 +21,8 @@ public class GearIntake extends Subsystem {
     private double m_lastPos;
 
     public GearIntake() {
-	m_gearArtic = new CANTalon(RobotMap.gearArticPort);
-	m_gearSpin = new CANTalon(RobotMap.gearSpinPort);
+	m_gearArtic = new CANTalon(RobotMap.kGearArticID);
+	m_gearSpin = new CANTalon(RobotMap.kGearSpinID);
 
 	m_gearArtic.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Absolute);
 	CANTalon.FeedbackDeviceStatus gearArticSensorPresent = m_gearArtic
@@ -90,4 +91,5 @@ public class GearIntake extends Subsystem {
     protected void initDefaultCommand() {
 	setDefaultCommand(new IntakeSetVoltage(0));
     }
+
 }

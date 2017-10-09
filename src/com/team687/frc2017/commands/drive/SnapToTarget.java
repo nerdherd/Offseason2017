@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Alignment based on vision and gyro. In auto, ends when aligned. In teleop,
- * ends when "wantToShoot" button is released
+ * ends when "wantToShoot" button is released.
  * 
  * @author tedlin
  * 
@@ -19,12 +19,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class SnapToTarget extends Command {
 
     private double m_startTime;
-    private double m_timeout = 6.87;
+    private double m_timeout;
     private int m_counter;
     private boolean m_isAuto;
 
     public SnapToTarget(boolean isAuto) {
-	m_timeout = 2; // default timeout is 6.87 seconds
+	m_timeout = 6.87; // default timeout is 6.87 seconds
 	m_isAuto = isAuto;
 
 	// subsystem dependencies
@@ -57,11 +57,12 @@ public class SnapToTarget extends Command {
     @Override
     protected void execute() {
 	double robotAngle = (360 - Robot.drive.getCurrentYaw()) % 360;
+
 	double relativeAngleError = VisionAdapter.getInstance().getAngleToTurn();
 	double processingTime = VisionAdapter.getInstance().getProcessedTime();
 	double absoluteDesiredAngle = relativeAngleError + Robot.drive.timeMachineYaw(processingTime);
+
 	double error = absoluteDesiredAngle - robotAngle;
-	SmartDashboard.putNumber("Angle Error", error);
 	double rotPower = DriveConstants.kRotP * error;
 	if (Math.abs(error) <= DriveConstants.kDriveRotationDeadband) {
 	    rotPower = 0;

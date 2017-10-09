@@ -6,13 +6,13 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * Drive straight without setting power to 0 when it reaches goal
+ * Drive straight without stopping when it reaches goal
  * 
  * @author tedlin
  *
  */
 
-public class DriveStraightContinuous extends Command {
+public class DriveDistanceContinuous extends Command {
 
     private double m_distance;
     private double m_straightPower;
@@ -22,7 +22,7 @@ public class DriveStraightContinuous extends Command {
      * @param straightPower
      * @param isHighGear
      */
-    public DriveStraightContinuous(double distance, double straightPower) {
+    public DriveDistanceContinuous(double distance, double straightPower) {
 	m_distance = distance;
 	m_straightPower = straightPower;
 

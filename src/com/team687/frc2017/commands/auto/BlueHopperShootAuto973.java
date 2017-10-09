@@ -1,7 +1,7 @@
 package com.team687.frc2017.commands.auto;
 
 import com.team687.frc2017.commands.drive.ArcTurn;
-import com.team687.frc2017.commands.drive.DriveStraightContinuous;
+import com.team687.frc2017.commands.drive.DriveDistanceContinuous;
 import com.team687.frc2017.commands.drive.DriveTime;
 import com.team687.frc2017.commands.drive.DriveUntilCollision;
 import com.team687.frc2017.commands.drive.WaitTime;
@@ -24,7 +24,7 @@ public class BlueHopperShootAuto973 extends CommandGroup {
 	// 0.687, true, false));
 
 	// drive to hopper with continuous motion and arc turns
-	addSequential(new DriveStraightContinuous(DriveConstants.BlueWallToHopperInitialDistance,
+	addSequential(new DriveDistanceContinuous(DriveConstants.BlueWallToHopperInitialDistance,
 		DriveConstants.kMaxRotPower));
 	addSequential(new ArcTurn(DriveConstants.BlueWallToHopperArcTurnAngle, true, 0));
 	addSequential(new WaitTime(0.5));

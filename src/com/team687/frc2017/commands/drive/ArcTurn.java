@@ -19,8 +19,7 @@ public class ArcTurn extends Command {
     private double m_straightPower;
     private double m_desiredAngle;
     private boolean m_isRightPowered;
-    private double m_timeout;
-    private double m_startTime;
+    private double m_timeout, m_startTime;
     private double m_error;
 
     public ArcTurn(double desiredAngle, boolean isRightPowered, double straightPower) {
@@ -38,7 +37,6 @@ public class ArcTurn extends Command {
      * @param desiredAngle
      * @param isRightPowered
      * @param striaghtPower
-     * @param isHighGear
      * @param timeout
      */
     public ArcTurn(double desiredAngle, boolean isRightPowered, double straightPower, double timeout) {
@@ -63,7 +61,7 @@ public class ArcTurn extends Command {
 	double robotAngle = (360 - Robot.drive.getCurrentYaw()) % 360;
 	m_error = m_desiredAngle - robotAngle;
 	SmartDashboard.putNumber("Angle Error", m_error);
-	double rotPower = DriveConstants.kRotP * m_error * 1.95; // since only one side of the drivetrain is moving
+	double rotPower = DriveConstants.kRotP * m_error * 1.95; // 1.95 since only one side of the drivetrain is moving
 	double sign = Math.signum(rotPower);
 
 	if (Math.abs(rotPower) > DriveConstants.kMaxRotPower) {

@@ -16,8 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class DriveTime extends Command {
 
     private double m_straightPower;
-    private double m_timeout;
-    private double m_startTime;
+    private double m_timeout, m_startTime;
 
     /**
      * @param straightPower

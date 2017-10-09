@@ -13,12 +13,10 @@ import com.team687.frc2017.constants.DriveConstants;
 public class NerdyMath {
 
     public static double radsToDeg(double deg) {
-	// Native algorithm
 	return deg * 360 / (2 * Math.PI);
     }
 
     public static double degToRads(double rads) {
-	// Native algorithm
 	return rads * (2 * Math.PI) / 360;
     }
 

@@ -93,10 +93,10 @@ public class Drive extends Subsystem {
     /**
      * Set drivetrain motor power to value between -1.0 and +1.0
      * 
-     * @param lPow
-     * @param rPow
+     * @param leftPower
+     * @param rightPower
      */
-    public void setPower(double lPow, double rPow) {
+    public void setPower(double leftPower, double rightPower) {
 	m_leftMaster.changeControlMode(TalonControlMode.PercentVbus);
 	m_leftSlave1.changeControlMode(TalonControlMode.PercentVbus);
 	m_leftSlave2.changeControlMode(TalonControlMode.PercentVbus);
@@ -104,13 +104,13 @@ public class Drive extends Subsystem {
 	m_rightSlave1.changeControlMode(TalonControlMode.PercentVbus);
 	m_rightSlave2.changeControlMode(TalonControlMode.PercentVbus);
 
-	m_leftMaster.set(lPow);
-	m_leftSlave1.set(lPow);
-	m_leftSlave2.set(lPow);
+	m_leftMaster.set(leftPower);
+	m_leftSlave1.set(leftPower);
+	m_leftSlave2.set(leftPower);
 
-	m_rightMaster.set(rPow);
-	m_rightSlave1.set(rPow);
-	m_rightSlave2.set(rPow);
+	m_rightMaster.set(rightPower);
+	m_rightSlave1.set(rightPower);
+	m_rightSlave2.set(rightPower);
     }
 
     public void setBrakeMode(boolean enabled) {
@@ -328,7 +328,7 @@ public class Drive extends Subsystem {
     }
 
     public void stopDrive() {
-	setPower(0, 0);
+	setPower(0.0, 0.0);
     }
 
     public void reportToSmartDashboard() {

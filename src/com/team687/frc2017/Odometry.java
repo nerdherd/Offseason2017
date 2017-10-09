@@ -18,30 +18,25 @@ public class Odometry {
 
     private static Odometry m_instance = null;
 
-    private double m_gyroYawDegrees;
-    private double m_gyroYawRadians;
-    private double m_derivedYaw;
-    private double m_angularVelocity;
-    private double m_arcRadius;
-
-    private double m_leftDistance;
-    private double m_rightDistance;
-    private double m_leftVelocity;
-    private double m_rightVelocity;
-
-    private double m_currentTime;
-    private double m_lastTime;
-    private double m_deltaTime;
-
-    private Pose m_lastPose;
-    private Pose m_newPose;
-
     public static Odometry getInstance() {
 	if (m_instance == null) {
 	    m_instance = new Odometry();
 	}
 	return m_instance;
     }
+
+    private double m_gyroYawDegrees, m_gyroYawRadians;
+    private double m_derivedYaw;
+    private double m_angularVelocity;
+    private double m_arcRadius;
+
+    private double m_leftDistance, m_rightDistance;
+    private double m_leftVelocity, m_rightVelocity;
+
+    private double m_currentTime, m_lastTime, m_deltaTime;
+
+    private Pose m_lastPose;
+    private Pose m_newPose;
 
     protected Odometry() {
 	m_lastTime = Timer.getFPGATimestamp();

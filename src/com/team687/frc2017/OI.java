@@ -197,8 +197,6 @@ public class OI {
 
     /**
      * @return Y of articulation joystick
-     * 
-     * @return
      */
     public double getArticY() {
 	return articJoy.getY();

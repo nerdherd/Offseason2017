@@ -19,16 +19,16 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class DriveBezierRio extends Command {
 
     private BezierCurve m_path;
-    private double m_basePower = 1; // always equal to 1
+    private double m_basePower = 1; // 1.0 is max PercentVBus output
     private double m_straightPower;
     private boolean m_straightPowerIsDynamic;
     private boolean m_softStop;
 
-    private ArrayList<Double> m_heading;
+    private ArrayList<Double> m_headingList;
     private double m_desiredHeading;
-    private ArrayList<Double> m_arcLength;
+    private ArrayList<Double> m_arcLengthList;
 
-    private int m_counter;
+    private int m_pathSegmentCounter;
     private boolean m_pathIsFinished;
     private double m_direction;
 
@@ -66,56 +66,48 @@ public class DriveBezierRio extends Command {
 	Robot.drive.shiftUp();
 
 	m_path.calculateBezier();
-	m_heading = m_path.getHeading();
-	m_arcLength = m_path.getArcLength();
+	m_headingList = m_path.getHeadingList();
+	m_arcLengthList = m_path.getArcLengthList();
 
-	m_counter = 0;
+	m_pathSegmentCounter = 0;
 	m_pathIsFinished = false;
 	m_direction = Math.signum(m_straightPower);
     }
 
     @Override
     protected void execute() {
-	if (m_counter < m_arcLength.size()) {
-	    if (Math.abs(Robot.drive.getDrivetrainTicks()) < m_arcLength.get(m_counter)) {
+	if (m_pathSegmentCounter < m_arcLengthList.size()) {
+	    if (Math.abs(Robot.drive.getDrivetrainTicks()) < m_arcLengthList.get(m_pathSegmentCounter)) {
 		double robotAngle = (360 - Robot.drive.getCurrentYaw()) % 360;
-		m_desiredHeading = m_heading.get(m_counter); // TOOD: figure out if we have to modify this value when
-							     // going reverse.
-		m_desiredHeading = -m_desiredHeading; // This is always necessary because of how our rotational PID is
-						      // structured.
-		double error = m_desiredHeading - robotAngle;
-		// double expectedDeltaHeading = 0;
-		// if (m_counter >= 1) {
-		// expectedDeltaHeading = Math.abs(m_heading.get(m_counter) -
-		// m_heading.get(m_counter - 1));
-		// }
+		m_desiredHeading = m_headingList.get(m_pathSegmentCounter); // TOOD: figure out if we have to modify
+									    // this value when going reverse
 
-		error = (error > 180) ? error - 360 : error;
-		error = (error < -180) ? error + 360 : error;
+		m_desiredHeading = -m_desiredHeading; // Reversing desired heading is always necessary because of how
+						      // our rotational PID is structured.
+		double headingError = m_desiredHeading - robotAngle;
+		headingError = (headingError > 180) ? headingError - 360 : headingError;
+		headingError = (headingError < -180) ? headingError + 360 : headingError;
 
-		double rotPower = DriveConstants.kRotPBezier * error;
-		// default is specified straight power
-		double straightPower = m_straightPower;
+		double rotPower = DriveConstants.kRotPBezier * headingError;
+		double straightPower = m_straightPower; // default is specified straight power
 
-		// dynamic straight power
 		if (m_straightPowerIsDynamic) {
-		    straightPower = m_direction * m_basePower / (Math.abs(error) * DriveConstants.kStraightPowerAdjuster);
+		    straightPower = m_direction * m_basePower
+			    / (Math.abs(headingError) * DriveConstants.kStraightPowerAdjuster);
 		}
 
 		double maxStraightPower = DriveConstants.kMaxStraightPower;
 		if (m_softStop) {
-		    double straightError = m_arcLength.get(m_arcLength.size() - 1)
+		    double straightErrorFromEnd = m_arcLengthList.get(m_arcLengthList.size() - 1)
 			    - Math.abs(Robot.drive.getDrivetrainTicks());
-		    double newMaxStraightPower = DriveConstants.kDistPBezier * straightError;
-		    maxStraightPower = Math.min(Math.abs(maxStraightPower), Math.abs(newMaxStraightPower));
+		    double softMaxStraightPower = DriveConstants.kDistPBezier * straightErrorFromEnd;
+		    maxStraightPower = Math.min(Math.abs(maxStraightPower), Math.abs(softMaxStraightPower));
 		}
 
-		// limit straight power to maintain rotPower to straightPower ratio
-		// also for soft landings
+		// limit straight power to soft stop and to maintain straight:rotational ratio
 		if (Math.abs(straightPower) > maxStraightPower) {
 		    straightPower = maxStraightPower * m_direction;
 		}
-
 		// make sure robot reaches end point
 		if (Math.abs(straightPower) < DriveConstants.kMinStraightPower) {
 		    straightPower = DriveConstants.kMinStraightPower * m_direction;
@@ -125,7 +117,7 @@ public class DriveBezierRio extends Command {
 		double rightPow = rotPower - straightPower;
 		Robot.drive.setPower(leftPow, rightPow);
 	    } else {
-		m_counter++;
+		m_pathSegmentCounter++;
 	    }
 	} else {
 	    m_pathIsFinished = true;
@@ -135,7 +127,7 @@ public class DriveBezierRio extends Command {
     @Override
     protected boolean isFinished() {
 	return m_pathIsFinished
-		|| Math.abs(Robot.drive.getDrivetrainTicks()) >= m_arcLength.get(m_arcLength.size() - 1);
+		|| Math.abs(Robot.drive.getDrivetrainTicks()) >= m_arcLengthList.get(m_arcLengthList.size() - 1);
     }
 
     @Override
