@@ -36,6 +36,7 @@ public class GearIntake extends Subsystem {
 	m_gearArtic.setD(GearIntakeConstants.kGearIntakeD);
 	m_gearArtic.setF(GearIntakeConstants.kGearIntakeF);
 	m_gearArtic.setCurrentLimit(GearIntakeConstants.kIntakeCurrentLimit);
+
 	m_gearSpin.changeControlMode(TalonControlMode.Voltage);
 
 	m_lastPos = m_gearArtic.getPosition();

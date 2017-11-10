@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */
 
-public class DriveBezierRio extends Command {
+public class DriveBezierPath extends Command {
 
     private BezierCurve m_path;
     private double m_basePower = 1; // 1.0 is max PercentVBus output
@@ -32,7 +32,7 @@ public class DriveBezierRio extends Command {
     private boolean m_pathIsFinished;
     private double m_direction;
 
-    public DriveBezierRio(double x0, double y0, double x1, double y1, double x2, double y2, double x3, double y3,
+    public DriveBezierPath(double x0, double y0, double x1, double y1, double x2, double y2, double x3, double y3,
 	    double straightPower, boolean straightPowerIsDynamic, boolean softStop) {
 	m_path = new BezierCurve(x0, y0, x1, y1, x2, y2, x3, y3);
 	m_straightPower = straightPower;
@@ -51,7 +51,7 @@ public class DriveBezierRio extends Command {
      * @param softStop
      *            (if you want to slow down near end)
      */
-    public DriveBezierRio(double[] path, double straightPower, boolean straightPowerIsDynamic, boolean softStop) {
+    public DriveBezierPath(double[] path, double straightPower, boolean straightPowerIsDynamic, boolean softStop) {
 	m_path = new BezierCurve(path[0], path[1], path[2], path[3], path[4], path[5], path[6], path[7]);
 	m_straightPower = straightPower;
 	m_straightPowerIsDynamic = straightPowerIsDynamic;
@@ -63,7 +63,6 @@ public class DriveBezierRio extends Command {
 	SmartDashboard.putString("Current Command", "DriveBezierRio");
 	Robot.drive.stopDrive();
 	Robot.drive.resetEncoders();
-	Robot.drive.shiftUp();
 
 	m_path.calculateBezier();
 	m_headingList = m_path.getHeadingList();

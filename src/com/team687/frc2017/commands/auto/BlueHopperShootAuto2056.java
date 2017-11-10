@@ -1,6 +1,6 @@
 package com.team687.frc2017.commands.auto;
 
-import com.team687.frc2017.commands.drive.DriveBezierRio;
+import com.team687.frc2017.commands.drive.DriveBezierPath;
 import com.team687.frc2017.commands.drive.DriveDistancePID;
 import com.team687.frc2017.commands.drive.SnapToTarget;
 import com.team687.frc2017.commands.drive.TurnTime;
@@ -21,7 +21,7 @@ public class BlueHopperShootAuto2056 extends CommandGroup {
 
     public BlueHopperShootAuto2056() {
 	// drive a little past hopper
-	addSequential(new DriveBezierRio(DriveConstants.BluePathWallToHopper2056, 0.4, false, false));
+	addSequential(new DriveBezierPath(DriveConstants.BluePathWallToHopper2056, 0.4, false, false));
 	addSequential(new WaitTime(0.3));
 
 	// proc hopper by turning

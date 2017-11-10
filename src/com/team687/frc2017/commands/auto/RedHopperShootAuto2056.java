@@ -1,6 +1,6 @@
 package com.team687.frc2017.commands.auto;
 
-import com.team687.frc2017.commands.drive.DriveBezierRio;
+import com.team687.frc2017.commands.drive.DriveBezierPath;
 import com.team687.frc2017.commands.drive.DriveDistancePID;
 import com.team687.frc2017.commands.drive.SnapToTarget;
 import com.team687.frc2017.commands.drive.TurnTime;
@@ -19,7 +19,7 @@ public class RedHopperShootAuto2056 extends CommandGroup {
 
     public RedHopperShootAuto2056() {
 	// drive a little past hopper
-	addSequential(new DriveBezierRio(DriveConstants.RedPathWallToHopper2056, 0.4, false, false));
+	addSequential(new DriveBezierPath(DriveConstants.RedPathWallToHopper2056, 0.4, false, false));
 
 	// proc hopper by turning
 	addSequential(new TurnTime(-0.687, 0.3));

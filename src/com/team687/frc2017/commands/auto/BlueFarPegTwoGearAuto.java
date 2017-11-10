@@ -1,6 +1,6 @@
 package com.team687.frc2017.commands.auto;
 
-import com.team687.frc2017.commands.drive.DriveBezierRio;
+import com.team687.frc2017.commands.drive.DriveBezierPath;
 import com.team687.frc2017.commands.drive.DriveDistancePID;
 import com.team687.frc2017.commands.drive.DriveTime;
 import com.team687.frc2017.commands.drive.TurnToAngle;
@@ -23,9 +23,9 @@ public class BlueFarPegTwoGearAuto extends CommandGroup {
 
     public BlueFarPegTwoGearAuto() {
 	addParallel(new IntakeTuckRetain());
-	addSequential(new DriveBezierRio(DriveConstants.BluePathWallToFarPeg, -0.687, true, true));
+	addSequential(new DriveBezierPath(DriveConstants.BluePathWallToFarPeg, -0.687, true, true));
 	addParallel(new IntakeDown());
-	addSequential(new DriveBezierRio(DriveConstants.BluePathFarPegBackUp, 0.687, true, true));
+	addSequential(new DriveBezierPath(DriveConstants.BluePathFarPegBackUp, 0.687, true, true));
 	addSequential(new WaitTime(0.2));
 
 	addParallel(new IntakeDownSpin());
@@ -41,7 +41,7 @@ public class BlueFarPegTwoGearAuto extends CommandGroup {
 	addSequential(new TurnToAngle(0, 3));
 	addSequential(new WaitTime(0.2));
 
-	addSequential(new DriveBezierRio(DriveConstants.BluePathWallToFarPeg, -0.687, true, true));
+	addSequential(new DriveBezierPath(DriveConstants.BluePathWallToFarPeg, -0.687, true, true));
 	addParallel(new IntakeDown());
 	addSequential(new DriveTime(0.5, 3));
     }
