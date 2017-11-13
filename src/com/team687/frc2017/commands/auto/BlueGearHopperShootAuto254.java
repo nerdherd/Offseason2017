@@ -1,6 +1,5 @@
 package com.team687.frc2017.commands.auto;
 
-import com.team687.frc2017.commands.drive.ArcTurn;
 import com.team687.frc2017.commands.drive.DriveBezierPath;
 import com.team687.frc2017.commands.drive.TurnToAngle;
 import com.team687.frc2017.commands.gear.IntakeDown;
@@ -28,7 +27,6 @@ public class BlueGearHopperShootAuto254 extends CommandGroup {
 	// drive to hopper
 	// addParallel(new SetGearManipulatorUp());
 	addSequential(new DriveBezierPath(DriveConstants.BluePathPegToHopper, 0.687, true, false));
-	addSequential(new ArcTurn(DriveConstants.BlueHopperToBoilerCorrectingAngle, false, 0.33));
 
 	// shoot
 	// addParallel(new LiveVisionTracking());

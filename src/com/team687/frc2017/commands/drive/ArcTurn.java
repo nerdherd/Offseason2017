@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * Arc turning to absolute angle
+ * Pivot to absolute angle
  * 
  * @author tedlin
  *
@@ -16,33 +16,19 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ArcTurn extends Command {
 
-    private double m_straightPower;
     private double m_desiredAngle;
     private boolean m_isRightPowered;
     private double m_timeout, m_startTime;
     private double m_error;
 
-    public ArcTurn(double desiredAngle, boolean isRightPowered, double straightPower) {
-	m_desiredAngle = desiredAngle;
-	m_isRightPowered = isRightPowered;
-	m_straightPower = straightPower;
-	m_timeout = 5;
-
-	requires(Robot.drive);
-    }
-
     /**
-     * Arc Turn
-     * 
      * @param desiredAngle
      * @param isRightPowered
-     * @param striaghtPower
      * @param timeout
      */
-    public ArcTurn(double desiredAngle, boolean isRightPowered, double straightPower, double timeout) {
+    public ArcTurn(double desiredAngle, boolean isRightPowered, double timeout) {
 	m_desiredAngle = desiredAngle;
 	m_isRightPowered = isRightPowered;
-	m_straightPower = straightPower;
 	m_timeout = timeout;
 
 	requires(Robot.drive);
@@ -60,7 +46,8 @@ public class ArcTurn extends Command {
     protected void execute() {
 	double robotAngle = (360 - Robot.drive.getCurrentYaw()) % 360;
 	m_error = m_desiredAngle - robotAngle;
-	SmartDashboard.putNumber("Angle Error", m_error);
+	m_error = (m_error > 180) ? m_error - 360 : m_error;
+	m_error = (m_error < -180) ? m_error + 360 : m_error;
 	double rotPower = DriveConstants.kRotP * m_error * 1.95; // 1.95 since only one side of the drivetrain is moving
 	double sign = Math.signum(rotPower);
 
@@ -72,9 +59,9 @@ public class ArcTurn extends Command {
 	}
 
 	if (m_isRightPowered) {
-	    Robot.drive.setPower(0 + m_straightPower, rotPower - m_straightPower);
+	    Robot.drive.setPower(0, rotPower);
 	} else if (!m_isRightPowered) {
-	    Robot.drive.setPower(rotPower + m_straightPower, 0 - m_straightPower);
+	    Robot.drive.setPower(rotPower, 0);
 	}
     }
 

@@ -2,7 +2,6 @@ package com.team687.frc2017;
 
 import com.team687.frc2017.commands.auto.BlueCenterPegGearAuto;
 import com.team687.frc2017.commands.auto.BlueCenterPegTwoGearAuto;
-import com.team687.frc2017.commands.drive.ArcTurn;
 import com.team687.frc2017.commands.drive.DriveUntilCollision;
 import com.team687.frc2017.commands.drive.LiveVisionTracking;
 import com.team687.frc2017.commands.drive.ResetEncoders;
@@ -107,7 +106,6 @@ public class OI {
 	SmartDashboard.putData("Drive until Collision", new DriveUntilCollision(0.971, 0.987));
 
 	SmartDashboard.putData("Rotate to 90", new TurnToAngle(DriveConstants.BlueWallToHopperArcTurnAngle));
-	SmartDashboard.putData("Arc to 90", new ArcTurn(DriveConstants.BlueWallToHopperArcTurnAngle, true, 0));
 
 	SmartDashboard.putData("Live Vision Tracking", new LiveVisionTracking());
 	SmartDashboard.putData("Snap To Target Auto", new SnapToTarget(true));
