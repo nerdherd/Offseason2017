@@ -1,7 +1,6 @@
 package com.team687.frc2017.commands.drive;
 
 import com.team687.frc2017.Robot;
-import com.team687.frc2017.constants.DriveConstants;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -18,6 +17,7 @@ public class DriveAtHeading extends Command {
 
     private double m_straightPower;
     private double m_heading, m_distance;
+    private double m_kRotP;
 
     /**
      * @param straightPower
@@ -25,12 +25,13 @@ public class DriveAtHeading extends Command {
      * @param heading
      * @param distance
      *            (absolute value)
-     * @param isHighGear
+     * @param kRotP
      */
-    public DriveAtHeading(double straightPower, double heading, double distance) {
+    public DriveAtHeading(double straightPower, double heading, double distance, double kRotP) {
 	m_straightPower = straightPower;
 	m_heading = heading;
 	m_distance = distance;
+	m_kRotP = kRotP;
 
 	// subsystem dependencies
 	requires(Robot.drive);
@@ -47,7 +48,7 @@ public class DriveAtHeading extends Command {
 	double rotError = -m_heading - robotAngle;
 	rotError = (rotError > 180) ? rotError - 360 : rotError;
 	rotError = (rotError < -180) ? rotError + 360 : rotError;
-	double rotPower = DriveConstants.kRotP * rotError;
+	double rotPower = m_kRotP * rotError;
 
 	Robot.drive.setPower(rotPower + m_straightPower, rotPower - m_straightPower);
     }
