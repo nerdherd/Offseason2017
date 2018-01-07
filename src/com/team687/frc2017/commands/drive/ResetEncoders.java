@@ -27,11 +27,12 @@ public class ResetEncoders extends Command {
 
     @Override
     protected void execute() {
+	Robot.drive.resetEncoders();
     }
 
     @Override
     protected boolean isFinished() {
-	return true;
+	return Robot.drive.getDrivetrainTicks() == 0;
     }
 
     @Override

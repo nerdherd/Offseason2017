@@ -16,19 +16,38 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveDistancePID extends Command {
 
-    private double m_rightDistance, m_leftDistance;
-    private double m_rightError, m_leftError;
+    private double m_rightDistance;
+    private double m_leftDistance;
+    private double m_rightError;
+    private double m_leftError;
+    private double m_sign;
+   
+    private double m_kP;
 
-    private double m_startTime, m_timeout;
+    private double m_startTime;
+    private double m_timeout;
 
     public DriveDistancePID(double distance) {
-	m_timeout = 10;
+	m_timeout = 1.678;
 	m_rightDistance = distance;
 	m_leftDistance = distance;
 
 	// subsystem dependencies
 	requires(Robot.drive);
     }
+
+    // /**
+    // * @param distance
+    // * @param timeout
+    // */
+    // public DriveDistancePID(double distance, double timeout) {
+    // m_timeout = timeout;
+    // m_rightDistance = distance;
+    // m_leftDistance = distance;
+    //
+    // // subsystem dependencies
+    // requires(Robot.drive);
+    // }
 
     /**
      * @param rightDistance
@@ -47,6 +66,9 @@ public class DriveDistancePID extends Command {
     @Override
     protected void initialize() {
 	SmartDashboard.putString("Current Command", "DriveDistancePID");
+	
+	m_sign = Math.signum(m_rightDistance);
+	m_kP = DriveConstants.kDistP;
 
 	Robot.drive.shiftUp();
 	Robot.drive.stopDrive();
@@ -59,26 +81,31 @@ public class DriveDistancePID extends Command {
 	m_rightError = m_rightDistance - Robot.drive.getRightTicks();
 	m_leftError = m_leftDistance - Robot.drive.getLeftTicks();
 
-	double straightRightPower = DriveConstants.kDistP * m_rightError;
-	double straightLeftPower = DriveConstants.kDistP * m_leftError;
+	double straightRightPower = m_kP * m_rightError;
+	double straightLeftPower = m_kP * m_leftError;
+	
+	SmartDashboard.putNumber("Right error", m_rightError);
+	SmartDashboard.putNumber("Left error", m_leftError);
+	
+	SmartDashboard.putNumber("Power", straightRightPower);
 
-	double rightSign = Math.signum(straightRightPower);
-	if (Math.abs(straightRightPower) > DriveConstants.kMaxDistPower) {
-	    straightRightPower = DriveConstants.kMaxDistPower * rightSign;
-	}
-	if (Math.abs(straightRightPower) < DriveConstants.kMinDistPower) {
-	    straightRightPower = DriveConstants.kMinDistPower * rightSign;
-	}
+//	double rightSign = Math.signum(straightRightPower);
+//	if (Math.abs(straightRightPower) > DriveConstants.kMaxDistPower) {
+//	    straightRightPower = DriveConstants.kMaxDistPower * rightSign;
+//	}
+//	if (Math.abs(straightRightPower) < DriveConstants.kMinDistPower) {
+//	    straightRightPower = DriveConstants.kMinDistPower * rightSign;
+//	}
+//
+//	double leftSign = Math.signum(straightLeftPower);
+//	if (Math.abs(straightLeftPower) > DriveConstants.kMaxDistPower) {
+//	    straightLeftPower = DriveConstants.kMaxDistPower * leftSign;
+//	}
+//	if (Math.abs(straightLeftPower) < DriveConstants.kMinDistPower) {
+//	    straightLeftPower = DriveConstants.kMinDistPower * leftSign;
+//	}
 
-	double leftSign = Math.signum(straightLeftPower);
-	if (Math.abs(straightLeftPower) > DriveConstants.kMaxDistPower) {
-	    straightLeftPower = DriveConstants.kMaxDistPower * leftSign;
-	}
-	if (Math.abs(straightLeftPower) < DriveConstants.kMinDistPower) {
-	    straightLeftPower = DriveConstants.kMinDistPower * leftSign;
-	}
-
-	Robot.drive.setPower(straightLeftPower, -straightRightPower);
+	Robot.drive.setPower(straightRightPower, -straightRightPower);
     }
 
     @Override

@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * Reset gyro. Should not be done unless testing or at the beginning of a match.
+ * Reset gyro with a command so we do not have to enable/disable every time
  */
 
 public class ResetGyro extends Command {

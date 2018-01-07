@@ -1,6 +1,7 @@
 package com.team687.frc2017.commands.drive;
 
 import com.team687.frc2017.Robot;
+import com.team687.frc2017.constants.DriveConstants;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -13,7 +14,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */
 
-public class DriveAtHeading extends Command {
+public class DriveAtHeading 
+extends Command {
 
     private double m_straightPower;
     private double m_heading, m_distance;
@@ -25,7 +27,7 @@ public class DriveAtHeading extends Command {
      * @param heading
      * @param distance
      *            (absolute value)
-     * @param kRotP
+     * @param isHighGear
      */
     public DriveAtHeading(double straightPower, double heading, double distance, double kRotP) {
 	m_straightPower = straightPower;
@@ -40,6 +42,8 @@ public class DriveAtHeading extends Command {
     @Override
     protected void initialize() {
 	SmartDashboard.putString("Current Command", "DriveAtHeading");
+	
+	Robot.drive.shiftUp();
     }
 
     @Override

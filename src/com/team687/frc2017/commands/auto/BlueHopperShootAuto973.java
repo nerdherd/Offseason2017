@@ -1,7 +1,6 @@
 package com.team687.frc2017.commands.auto;
 
-import com.team687.frc2017.commands.drive.ArcTurn;
-import com.team687.frc2017.commands.drive.DriveDistanceContinuous;
+import com.team687.frc2017.commands.drive.DriveStraightContinuous;
 import com.team687.frc2017.commands.drive.DriveTime;
 import com.team687.frc2017.commands.drive.DriveUntilCollision;
 import com.team687.frc2017.commands.drive.WaitTime;
@@ -11,9 +10,6 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  * Blue hopper auto 973 style
- * 
- * @author tedlin
- *
  */
 
 public class BlueHopperShootAuto973 extends CommandGroup {
@@ -24,9 +20,10 @@ public class BlueHopperShootAuto973 extends CommandGroup {
 	// 0.687, true, false));
 
 	// drive to hopper with continuous motion and arc turns
-	addSequential(new DriveDistanceContinuous(DriveConstants.BlueWallToHopperInitialDistance,
+	addSequential(new DriveStraightContinuous(DriveConstants.BlueWallToHopperInitialDistance,
 		DriveConstants.kMaxRotPower));
-	addSequential(new ArcTurn(DriveConstants.BlueWallToHopperArcTurnAngle, true, 6.87));
+	// addSequential(new ArcTurn(DriveConstants.BlueWallToHopperArcTurnAngle, true,
+	// 0));
 	addSequential(new WaitTime(0.5));
 	addSequential(new DriveUntilCollision(0.971, 0.987));
 
@@ -38,7 +35,7 @@ public class BlueHopperShootAuto973 extends CommandGroup {
 
 	// back up in one motion
 	addSequential(new DriveTime(-0.687, 1));
-	addSequential(new ArcTurn(DriveConstants.BlueHopperToBoilerAngle, false, 6.87));
+	// addSequential(new ArcTurn(DriveConstants.BlueHopperToBoilerAngle, false, 0));
 
 	// aim and shoot
 	// addSequential(new SnapToTarget(true));

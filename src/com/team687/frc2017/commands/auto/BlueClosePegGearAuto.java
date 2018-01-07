@@ -11,9 +11,6 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  * Close peg single gear auto
- * 
- * @author tedlin
- *
  */
 
 public class BlueClosePegGearAuto extends CommandGroup {

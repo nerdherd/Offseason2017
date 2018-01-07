@@ -19,7 +19,8 @@ public class ApproachTarget extends Command {
 
     private double m_distance;
     private double m_straightPower;
-    private double m_startTime, m_timeout;
+    private double m_startTime;
+    private double m_timeout = 6.87;
     private boolean m_softStop;
 
     public ApproachTarget(double distance, double straightPower, boolean softStop) {

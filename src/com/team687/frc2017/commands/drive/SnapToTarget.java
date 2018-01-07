@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Alignment based on vision and gyro. In auto, ends when aligned. In teleop,
- * ends when "wantToShoot" button is released.
+ * ends when "wantToShoot" button is released
  * 
  * @author tedlin
  * 
@@ -19,12 +19,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class SnapToTarget extends Command {
 
     private double m_startTime;
-    private double m_timeout;
+    private double m_timeout = 6.87;
     private int m_counter;
     private boolean m_isAuto;
 
     public SnapToTarget(boolean isAuto) {
-	m_timeout = 6.87; // default timeout is 6.87 seconds
+	m_timeout = 2; // default timeout is 6.87 seconds
 	m_isAuto = isAuto;
 
 	// subsystem dependencies
@@ -48,7 +48,7 @@ public class SnapToTarget extends Command {
 	SmartDashboard.putString("Current Command", "SnapToTarget");
 
 	Robot.drive.stopDrive();
-	Robot.drive.shiftUp();
+	Robot.drive.shiftDown();
 	m_counter = 0;
 
 	m_startTime = Timer.getFPGATimestamp();
@@ -57,14 +57,15 @@ public class SnapToTarget extends Command {
     @Override
     protected void execute() {
 	double robotAngle = (360 - Robot.drive.getCurrentYaw()) % 360;
-
 	double relativeAngleError = VisionAdapter.getInstance().getAngleToTurn();
-	double processingTime = VisionAdapter.getInstance().getProcessedTime();
+	double processingTime = 0;
 	double absoluteDesiredAngle = relativeAngleError + Robot.drive.timeMachineYaw(processingTime);
-
-	double error = absoluteDesiredAngle - robotAngle;
-	double rotPower = DriveConstants.kRotP * error;
-	if (Math.abs(error) <= DriveConstants.kDriveRotationDeadband) {
+	double rotError = absoluteDesiredAngle - robotAngle;
+	rotError = (rotError > 180) ? rotError - 360 : rotError;
+	rotError = (rotError < -180) ? rotError + 360 : rotError;
+	SmartDashboard.putNumber("Angle Error", rotError);
+	double rotPower = DriveConstants.kRotP * rotError;
+	if (Math.abs(rotError) <= DriveConstants.kDriveRotationDeadband) {
 	    rotPower = 0;
 	    m_counter++;
 	} else {
@@ -82,7 +83,7 @@ public class SnapToTarget extends Command {
 	    isFinished = Timer.getFPGATimestamp() - m_startTime > m_timeout
 		    || m_counter > DriveConstants.kDriveRotationCounter;
 	}
-	return isFinished;
+	return false;
     }
 
     @Override

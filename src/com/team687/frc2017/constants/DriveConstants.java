@@ -26,15 +26,15 @@ public class DriveConstants {
     public final static double kDriveDistanceOscillationCount = 5;
 
     // Rotation PID
-    public final static double kRotP = 0.014;
-    public final static double kMinRotPower = 0.254;
-    public final static double kMaxRotPower = 0.971;
+    // public final static double kRotP = 0.01; // arc turn
+    public final static double kRotP = 0.01;
+    public final static double kMinRotPower = 0.25;
+    public final static double kMaxRotPower = 1.0;
     public final static double kRotI = 0;
     public final static double kRotD = 0;
-    public final static double kDriveRotationTolerance = 0.5;
+    public final static double kDriveRotationTolerance = 2;
     public final static double kDriveRotationDeadband = 0.5;
-    public final static int kDriveRotationCounter = 3;
-
+    public final static int kDriveRotationCounter = 2;
     // Motion Profiling
     public final static double kMaxVelocity = 0;
     public final static double kMaxAcceleration = 0;
@@ -56,7 +56,7 @@ public class DriveConstants {
 
     // Bezier Curves
     public final static double kBezierStep = 60;
-    public final static double kRotPBezier = 0.03;
+    public final static double kRotPBezier = 0.0267;
     public final static double kDistPBezier = 0.001; // look at TODO on how to tune this
 						     // the higher this is, the less time to decelerate
     public final static double kMaxStraightPower = 0.75;
@@ -86,7 +86,7 @@ public class DriveConstants {
     public final static double RedWallToSecondGearAngle = 0;
     public final static double RedWallToSecondGearDistance = 0;
 
-    public final static double[] BluePathWallToClosePeg = { 0, 0, 0, 92278.44, 0, 92278.44, 74403.76, 134999.94 };
+    public final static double[] BluePathWallToClosePeg = { 0, 0, 0, 73000, 0, 84700, 101000, 142000 };
     public final static double[] BluePathPegToHopper = { 74403.7644, 134999.94, 0, 86582.24, 0, 198227.76, -33835.428,
 	    117615.1376 };
     public final static double BlueHopperToBoilerCorrectingAngle = 0;
@@ -101,9 +101,9 @@ public class DriveConstants {
     public final static double[] BluePathWallToHopper2056 = { 0, 0, -39000, 40000, -39000, 64000, -39000, 101000 };
     public final static double BluePathDistanceAlignWithHopper = 20000;
 
-    public final static double BlueWallToCenterPegDistance = -70000; // remember orientation with gear intake in front
-								     // means going backwards
-    public final static double BlueCenterPegBackUpDistance = 66000;
+    public final static double BlueWallToCenterPegDistance = -68000; // remember orientation with gear intake in front means
+								 // going backwards
+    public final static double BlueCenterPegBackUpDistance = 60000;
     public final static double BlueWallCenterToSecondGearAngle = 90;
     public final static double BlueWallCenterToSecondGearDistance = -70000;
     public final static double[] BluePathCenterPegToBoiler = { 0, 0, 0, 0, 0, 0, 0, 0 };
@@ -127,5 +127,6 @@ public class DriveConstants {
     public final static double BlueWallCloseToSecondGearDistance = 0;
 
     public final static double kShotDistanceFeet = 6.9028871; // in feet (direct from 1678's code)
+    public static final double kDriveRotationToleranceRough = 0.5;
 
 }

@@ -20,17 +20,18 @@ public class ArcTurn extends Command {
     private boolean m_isRightPowered;
     private double m_timeout, m_startTime;
     private double m_error;
+    private double m_sign;
 
     /**
      * @param desiredAngle
      * @param isRightPowered
      * @param timeout
      */
-    public ArcTurn(double desiredAngle, boolean isRightPowered, double timeout) {
-	m_desiredAngle = desiredAngle;
+    public ArcTurn(double desiredAngle, boolean isRightPowered, double timeout, double sign) {
+	m_desiredAngle = -desiredAngle;
 	m_isRightPowered = isRightPowered;
 	m_timeout = timeout;
-
+	m_sign = Math.signum(sign);	
 	requires(Robot.drive);
     }
 
@@ -48,15 +49,12 @@ public class ArcTurn extends Command {
 	m_error = m_desiredAngle - robotAngle;
 	m_error = (m_error > 180) ? m_error - 360 : m_error;
 	m_error = (m_error < -180) ? m_error + 360 : m_error;
-	double rotPower = DriveConstants.kRotP * m_error * 1.95; // 1.95 since only one side of the drivetrain is moving
+	double rotPower = DriveConstants.kRotP * m_error; // 1.95 since only one side of the drivetrain is moving
 	double sign = Math.signum(rotPower);
-
-	if (Math.abs(rotPower) > DriveConstants.kMaxRotPower) {
-	    rotPower = DriveConstants.kMaxRotPower * sign;
-	}
 	if (Math.abs(rotPower) < DriveConstants.kMinRotPower) {
 	    rotPower = DriveConstants.kMinRotPower * sign;
 	}
+	rotPower = Math.abs(rotPower) * m_sign;
 
 	if (m_isRightPowered) {
 	    Robot.drive.setPower(0, rotPower);
@@ -67,7 +65,7 @@ public class ArcTurn extends Command {
 
     @Override
     protected boolean isFinished() {
-	return Math.abs(m_error) < DriveConstants.kDriveRotationTolerance
+	return Math.abs(m_error) <= DriveConstants.kDriveRotationTolerance
 		|| Timer.getFPGATimestamp() - m_startTime > m_timeout;
     }
 

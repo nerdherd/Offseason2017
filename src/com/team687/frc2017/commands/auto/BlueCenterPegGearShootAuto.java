@@ -11,9 +11,6 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  * Blue center peg + shoot preload 10 kpa auto
- * 
- * @author tedlin
- *
  */
 
 public class BlueCenterPegGearShootAuto extends CommandGroup {

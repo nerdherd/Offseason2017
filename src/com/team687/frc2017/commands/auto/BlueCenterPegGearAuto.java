@@ -9,9 +9,6 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  * Blue center peg single gear auto
- * 
- * @author tedlin
- *
  */
 
 public class BlueCenterPegGearAuto extends CommandGroup {

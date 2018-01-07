@@ -2,31 +2,29 @@ package com.team687.frc2017.commands.drive;
 
 import com.team687.frc2017.Robot;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * Drive for a specified time
+ * Drive straight without setting power to 0 when it reaches goal
  * 
  * @author tedlin
  *
  */
 
-public class DriveTime extends Command {
+public class DriveStraightContinuous extends Command {
 
+    private double m_distance;
     private double m_straightPower;
-    private double m_timeout;
-    private double m_startTime;
 
     /**
+     * @param distance
      * @param straightPower
-     * @param timeout
      * @param isHighGear
      */
-    public DriveTime(double straightPower, double timeout) {
+    public DriveStraightContinuous(double distance, double straightPower) {
+	m_distance = distance;
 	m_straightPower = straightPower;
-	m_timeout = timeout;
 
 	// subsystem dependencies
 	requires(Robot.drive);
@@ -34,10 +32,10 @@ public class DriveTime extends Command {
 
     @Override
     protected void initialize() {
-	SmartDashboard.putString("Current Command", "DriveTime");
-	m_startTime = Timer.getFPGATimestamp();
+	SmartDashboard.putString("Current Command", "DriveStraightContinuous");
 
 	Robot.drive.shiftUp();
+	Robot.drive.setPower(0, 0);
     }
 
     @Override
@@ -47,12 +45,11 @@ public class DriveTime extends Command {
 
     @Override
     protected boolean isFinished() {
-	return Timer.getFPGATimestamp() - m_startTime > m_timeout;
+	return Robot.drive.getDrivetrainTicks() > m_distance;
     }
 
     @Override
     protected void end() {
-	Robot.drive.stopDrive();
     }
 
     @Override

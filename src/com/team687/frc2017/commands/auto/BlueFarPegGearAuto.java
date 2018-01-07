@@ -11,9 +11,6 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  * Blue far peg auto
- * 
- * @author tedlin
- *
  */
 
 public class BlueFarPegGearAuto extends CommandGroup {
